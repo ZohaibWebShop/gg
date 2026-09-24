@@ -1,0 +1,89 @@
+<section class="gg-section gg-amazon gg-section--navy">
+  <div class="gg-container">
+    <div class="gg-head-row">
+      <div class="gg-head-row__left">
+        <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Amazon Shopping' }}</span>
+        <h2 class="gg-amazon__title">{{ section.settings.title | default: 'SEE SOMETHING YOU LOVE?' }}</h2>
+      </div>
+      <div class="gg-head-row__right">
+        <p class="gg-amazon__sub">{{ section.settings.subtext | default: 'Shop g/g on Amazon and find school styles perfect for any occasion.' }}</p>
+      </div>
+    </div>
+
+    <div class="gg-amazon__grid">
+      {%- for block in section.blocks -%}
+        <div class="gg-amz-card" {{ block.shopify_attributes }}>
+          <div class="gg-amz-card__media">
+            <img src="{{ block.settings.image_asset | default: 'gg-am-1.png' | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="544" height="679">
+          </div>
+          <span class="gg-amz-card__badge">{{ block.settings.badge | default: 'Other' }}</span>
+          <h3 class="gg-amz-card__name">{{ block.settings.title }}</h3>
+          <div class="gg-amz-card__meta">
+            <span class="gg-amz-card__stars">★★★★★</span>
+            <span class="gg-amz-card__reviews">{{ block.settings.reviews | default: '5.0 (1.2k Reviews)' }}</span>
+          </div>
+          <div class="gg-amz-card__price">{{ block.settings.price }}</div>
+          <div class="gg-amz-card__actions">
+            <a class="gg-btn gg-btn--primary" href="{{ block.settings.buy_link | default: 'https://www.amazon.com' }}">{{ block.settings.cart_label | default: 'Add to Cart' }}</a>
+            <a class="gg-btn gg-btn--buy" href="{{ block.settings.buy_link | default: 'https://www.amazon.com' }}">{{ block.settings.buy_label | default: 'Buy Now' }}</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="gg-amazon__foot">
+      {%- if section.settings.cta_label != blank -%}
+        <a class="gg-btn gg-btn--primary" href="{{ section.settings.cta_link | default: 'https://www.amazon.com' }}">
+          {{ section.settings.cta_label }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      {%- endif -%}
+      <p class="gg-amazon__note">{{ section.settings.note | default: 'Available styles and purchasing are through Amazon.' }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Amazon Shopping",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Amazon Shopping" },
+    { "type": "text", "id": "title", "label": "Title", "default": "SEE SOMETHING YOU LOVE?" },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Shop g/g on Amazon and find school styles perfect for any occasion." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "SHOP ON AMAZON" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Available styles and purchasing are through Amazon." }
+  ],
+  "blocks": [
+    {
+      "type": "amazon",
+      "name": "Amazon product",
+      "settings": [
+        { "type": "select", "id": "image_asset", "label": "Default image", "options": [
+          { "value": "gg-am-1.png", "label": "Image 1 (Winona sport dress)" },
+          { "value": "gg-am-2.png", "label": "Image 2 (Wendy half-zip)" },
+          { "value": "gg-p-willow.png", "label": "Image 3 (Willow sherpa hoodie)" }
+        ] },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Other" },
+        { "type": "text", "id": "title", "label": "Title", "default": "PRODUCT NAME" },
+        { "type": "text", "id": "reviews", "label": "Reviews", "default": "5.0 (1.2k Reviews)" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$80.00" },
+        { "type": "text", "id": "cart_label", "label": "Add to cart label", "default": "Add to Cart" },
+        { "type": "text", "id": "buy_label", "label": "Buy now label", "default": "Buy Now" },
+        { "type": "url", "id": "buy_link", "label": "Buy link" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "G/G Amazon Shopping",
+      "blocks": [
+        { "type": "amazon", "settings": { "image_asset": "gg-am-1.png", "title": "WINONA CLASSIC CAMO SPORT DRESS", "price": "$80.00" } },
+        { "type": "amazon", "settings": { "image_asset": "gg-am-2.png", "title": "WENDY FASHION CAMO H2O HALF-ZIP", "price": "$88.00" } },
+        { "type": "amazon", "settings": { "image_asset": "gg-p-willow.png", "title": "WILLOW FASHION CAMO SHERPA HOODIE", "price": "$78.00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

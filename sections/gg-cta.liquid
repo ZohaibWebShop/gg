@@ -1,0 +1,34 @@
+<section class="gg-cta">
+  <div class="gg-cta__bg" style="background-image:url('{{ section.settings.image | default: 'gg-cta-bg.png' | asset_url }}')"></div>
+  <div class="gg-cta__tint"></div>
+  <div class="gg-container gg-cta__content">
+    <h2 class="gg-cta__title">{{ section.settings.title | default: 'Your team is calling,<br>your outfit is waiting' }}</h2>
+    <p class="gg-cta__serif">{{ section.settings.serif | default: 'Wear it like you mean it.' }}</p>
+    <p class="gg-cta__desc">{{ section.settings.subtext | default: 'Discover college fan staples and statement styles designed to keep your school part of your everyday wardrobe.' }}</p>
+    <div class="gg-cta__actions">
+      {%- if section.settings.pr_label != blank -%}
+        <a class="gg-btn gg-btn--primary gg-btn--serif" href="{{ section.settings.pr_link | default: routes.collections_url }}">{{ section.settings.pr_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.sc_label != blank -%}
+        <a class="gg-btn gg-btn--secondary gg-btn--serif" style="border-color:var(--gg-cream);color:var(--gg-cream);" href="{{ section.settings.sc_link | default: routes.collections_url }}">{{ section.settings.sc_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G CTA Banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Your team is calling,<br>your outfit is waiting" },
+    { "type": "text", "id": "serif", "label": "Serif line", "default": "Wear it like you mean it." },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Discover college fan staples and statement styles designed to keep your school part of your everyday wardrobe." },
+    { "type": "text", "id": "pr_label", "label": "Primary label", "default": "SHOP g/g" },
+    { "type": "url", "id": "pr_link", "label": "Primary link" },
+    { "type": "text", "id": "sc_label", "label": "Secondary label", "default": "Shop Your Team" },
+    { "type": "url", "id": "sc_link", "label": "Secondary link" }
+  ],
+  "presets": [{ "name": "G/G CTA Banner" }]
+}
+{% endschema %}

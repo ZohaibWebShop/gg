@@ -1,0 +1,71 @@
+<section class="gg-section gg-categories">
+  <div class="gg-container">
+    <div class="gg-head-row">
+      <div class="gg-head-row__left">
+        <h2 class="gg-h" style="font-size:clamp(36px,3.6vw,56px);">{{ section.settings.title | default: 'Your Starting Lineup' }}</h2>
+      </div>
+      <div class="gg-head-row__right">
+        <a class="gg-btn gg-btn--secondary gg-btn--serif gg-btn--round" href="{{ section.settings.all_link | default: routes.collections_url }}">
+          {{ section.settings.all_label | default: 'Explore All Products' }}
+        </a>
+      </div>
+    </div>
+
+    <div class="gg-cat-grid">
+      {%- for block in section.blocks -%}
+        <a class="gg-cat" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+          <div class="gg-cat__bg" style="background-image:url('{{ block.settings.image_asset | default: 'gg-cat-jacket.png' | asset_url }}')"></div>
+          <div class="gg-cat__overlay"></div>
+          <div class="gg-cat__body">
+            <h3 class="gg-cat__title">{{ block.settings.title }}</h3>
+            <p class="gg-cat__desc">{{ block.settings.subtext }}</p>
+            {%- if block.settings.cta != blank -%}
+              <span class="gg-cat__btn">{{ block.settings.cta }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Product Categories",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Your Starting Lineup" },
+    { "type": "text", "id": "all_label", "label": "All label", "default": "Explore All Products" },
+    { "type": "url", "id": "all_link", "label": "All link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "select", "id": "image_asset", "label": "Default image", "options": [
+          { "value": "gg-cat-sweater.png", "label": "Sweater" },
+          { "value": "gg-cat-hoodie.png", "label": "Hoodie" },
+          { "value": "gg-cat-tee.png", "label": "Baby Tee" },
+          { "value": "gg-cat-jacket.png", "label": "Jacket" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Category" },
+        { "type": "text", "id": "subtext", "label": "Subtext", "default": "Description" },
+        { "type": "text", "id": "cta", "label": "Button", "default": "SHOP NOW" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "G/G Product Categories",
+      "blocks": [
+        { "type": "category", "settings": { "image_asset": "gg-cat-sweater.png", "title": "The Sweater", "subtext": "Oversized, cozy, and anything but basic.", "cta": "SHOP SWEATERS" } },
+        { "type": "category", "settings": { "image_asset": "gg-cat-hoodie.png", "title": "The Hoodie", "subtext": "Your go-to layer for every chilly kickoff.", "cta": "SHOP HOODIES" } },
+        { "type": "category", "settings": { "image_asset": "gg-cat-tee.png", "title": "The Baby Tee", "subtext": "Small tee, big school spirit.", "cta": "SHOP TEES" } },
+        { "type": "category", "settings": { "image_asset": "gg-cat-jacket.png", "title": "The Statement Jacket", "subtext": "School colors made to stand out anywhere.", "cta": "SHOP Jackets" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+{% comment %}
+  G/G Header section — renders the shared `gg-header` snippet.
+  Brand name, header menu, and social link come from
+  Theme settings > G/G Brand (settings_schema.json).
+{% endcomment %}
+{% render 'gg-header' %}
+
+{% schema %}
+{
+  "name": "G/G Header",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Brand name, header menu, and social link are controlled from Theme settings > G/G Brand."
+    }
+  ],
+  "presets": [
+    {
+      "name": "G/G Header"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,9 @@
+{%- comment -%}
+  Renders a menu title in Title Case instead of ALL CAPS.
+  Example: "SHOP BY SCHOOL" -> "Shop By School"
+{%- endcomment -%}
+{%- assign words = title | split: ' ' -%}
+{%- for word in words -%}
+  {{ word | downcase | capitalize }}
+  {%- unless forloop.last %} {% endunless -%}
+{%- endfor -%}

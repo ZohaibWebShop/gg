@@ -1,0 +1,42 @@
+<section class="gg-section gg-lifestyle">
+  <div class="gg-container">
+    <div class="gg-head-row">
+      <div class="gg-head-row__left">
+        <h2 class="gg-h" style="font-size:clamp(36px,4.4vw,64px);">{{ section.settings.title | default: 'School Spirit That Goes Where You Go' }}</h2>
+      </div>
+      <div class="gg-head-row__right">
+        <p class="gg-sub" style="font-size:20px;">{{ section.settings.subtext | default: 'g/g makes collegiate style for beyond game day, with pieces designed to feel just as right in the stands as they do everywhere else.' }}</p>
+      </div>
+    </div>
+
+    <div class="gg-lifestyle__banner">
+      <div class="gg-lifestyle__bg" style="background-image:url('{{ section.settings.image | default: 'gg-lifestyle.png' | asset_url }}')"></div>
+      <div class="gg-lifestyle__tint"></div>
+      <span class="gg-lifestyle__logo">g/g</span>
+      <div class="gg-lifestyle__foot">
+        <h3 class="gg-lifestyle__heading">{{ section.settings.banner_heading | default: 'HELLO GORGEOUS' }}</h3>
+        <div class="gg-lifestyle__dots"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        {%- if section.settings.cta_label != blank -%}
+          <a class="gg-btn gg-btn--primary" href="{{ section.settings.cta_link | default: routes.collections_url }}">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Lifestyle Banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Banner image" },
+    { "type": "text", "id": "title", "label": "Title", "default": "School Spirit That Goes Where You Go" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "g/g makes collegiate style for beyond game day, with pieces designed to feel just as right in the stands as they do everywhere else." },
+    { "type": "text", "id": "banner_heading", "label": "Banner heading", "default": "HELLO GORGEOUS" },
+    { "type": "text", "id": "cta_label", "label": "Button", "default": "GET THE LOOK" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "G/G Lifestyle Banner" }]
+}
+{% endschema %}

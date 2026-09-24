@@ -1,0 +1,23 @@
+{% comment %}
+  G/G Footer section — renders the shared `gg-footer` snippet.
+  Footer menus, social link, and newsletter text come from
+  Theme settings > G/G Brand (settings_schema.json).
+{% endcomment %}
+{% render 'gg-footer' %}
+
+{% schema %}
+{
+  "name": "G/G Footer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Footer menus, social link, and newsletter text are controlled from Theme settings > G/G Brand."
+    }
+  ],
+  "presets": [
+    {
+      "name": "G/G Footer"
+    }
+  ]
+}
+{% endschema %}

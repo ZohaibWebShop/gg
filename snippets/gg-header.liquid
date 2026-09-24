@@ -1,0 +1,101 @@
+{%- assign gg_menu_name = settings.gg_menu | default: 'main-menu' -%}
+{%- assign gg_nav_menu = linklists[gg_menu_name] -%}
+<header class="gg-header">
+  <div class="gg-header__bar page-width">
+    {% render 'gg-logo' %}
+
+    <button type="button" class="gg-header__burger" aria-label="Menu" aria-expanded="false" aria-controls="gg-mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="24" height="24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <nav aria-label="Main">
+      <ul class="gg-header__nav">
+        {%- for link in gg_nav_menu.links -%}
+          <li class="{% if link.links != empty %}gg-has-dropdown{% endif %}">
+            <a href="{{ link.url }}">
+              {% render 'gg-link-title', title: link.title -%}
+              {%- if link.links != empty -%}
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m2.5 5 4.5 4.5L11.5 5"/></svg>
+              {%- endif -%}
+            </a>
+            {%- if link.links != empty -%}
+              <ul class="gg-header__dropdown">
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}">{% render 'gg-link-title', title: child.title -%}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- else -%}
+          <li><a href="{{ routes.root_url }}">Shop By School</a></li>
+          <li><a href="{{ routes.collections_url }}">Best Sellers</a></li>
+          <li><a href="{{ routes.collections_url }}">New Arrivals</a></li>
+          <li><a href="{{ routes.root_url }}">About Us</a></li>
+          <li><a href="{{ routes.collections_url }}">Collections</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="gg-header__icons">
+      <a href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg>
+      </a>
+      <a href="{{ routes.account_url }}" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.4-3.4 4.3-5 8-5s6.6 1.6 8 5"/></svg>
+      </a>
+      <a class="gg-header__cart gg-only-desktop" href="{{ routes.cart_url }}" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 12H7.2L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="gg-header__menu-overlay" data-gg-menu-close></div>
+<div class="gg-header__menu" id="gg-mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="gg-header__menu-head">
+    {% render 'gg-logo', preload: false %}
+    <button type="button" class="gg-header__menu-close" aria-label="Close menu" data-gg-menu-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="26" height="26"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <nav class="gg-header__menu-nav" aria-label="Mobile">
+    <ul>
+      {%- for link in gg_nav_menu.links -%}
+        <li>
+          <a href="{{ link.url }}">
+            {% render 'gg-link-title', title: link.title -%}
+            {%- if link.links != empty -%}
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m2.5 5 4.5 4.5L11.5 5"/></svg>
+            {%- endif -%}
+          </a>
+          {%- if link.links != empty -%}
+            <ul class="gg-header__menu-sub">
+              {%- for child in link.links -%}
+                <li><a href="{{ child.url }}">{% render 'gg-link-title', title: child.title -%}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </li>
+      {%- else -%}
+        <li><a href="{{ routes.root_url }}">Shop By School</a></li>
+        <li><a href="{{ routes.collections_url }}">Best Sellers</a></li>
+        <li><a href="{{ routes.collections_url }}">New Arrivals</a></li>
+        <li><a href="{{ routes.root_url }}">About Us</a></li>
+        <li><a href="{{ routes.collections_url }}">Collections</a></li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <div class="gg-header__menu-icons">
+    <a href="{{ routes.search_url }}" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg>
+    </a>
+    <a href="{{ routes.account_url }}" aria-label="Account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.4-3.4 4.3-5 8-5s6.6 1.6 8 5"/></svg>
+    </a>
+    <a href="{{ routes.cart_url }}" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 12H7.2L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<section class="gg-section gg-featuredsec">
+  <div class="gg-container">
+    <div class="gg-featured">
+      <div class="gg-featured__media gg-featured__media--ratio">
+        <img src="{{ section.settings.big_image | default: 'gg-featured-big.png' | asset_url }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="572" height="880">
+      </div>
+
+      <div class="gg-featured__content">
+        <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Featured Collection' }}</span>
+        <h2 class="gg-featured__title">{{ section.settings.title | default: 'Women’s College Apparel, g/g Style' }}</h2>
+        <p class="gg-featured__desc">{{ section.settings.subtext | default: 'From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do.' }}</p>
+
+        <div class="gg-featured__items">
+          {%- for block in section.blocks -%}
+            <a class="gg-card" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+              <div class="gg-card__media gg-card--auto">
+                <img src="{{ block.settings.image_asset | default: 'gg-f-gaby.png' | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="345" height="460">
+                <div class="gg-card__top">
+                  <span class="gg-card__logo">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.85)"/><path d="M16 6 5 24h6l5-10 5 10h6L16 6Z" fill="#0C3054"/></svg>
+                  </span>
+                  <svg class="gg-card__heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9A5.4 5.4 0 0 1 12 5.8 5.4 5.4 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9Z"/></svg>
+                </div>
+              </div>
+              <div class="gg-card__body">
+                <h3 class="gg-card__title">{{ block.settings.title }}</h3>
+                <div class="gg-card__price">{{ block.settings.price }}</div>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <div>
+            <a class="gg-btn gg-btn--primary" href="{{ section.settings.cta_link | default: routes.collections_url }}">
+              {{ section.settings.cta_label }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Featured Collection",
+  "settings": [
+    { "type": "image_picker", "id": "big_image", "label": "Large image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured Collection" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Women’s College Apparel, g/g Style" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop the Collection" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "select", "id": "image_asset", "label": "Default image", "options": [
+          { "value": "gg-f-sylvie.png", "label": "Sylvie name sleeve sweater" },
+          { "value": "gg-f-georgie.png", "label": "Georgie crystal denim jacket" },
+          { "value": "gg-f-gaby.png", "label": "Gaby contrast sherpa jacket" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "PRODUCT" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$100.00" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "G/G Featured Collection",
+      "blocks": [
+        { "type": "product", "settings": { "image_asset": "gg-f-sylvie.png", "title": "SYLVIE NAME SLEEVE SWEATER", "price": "$158.00" } },
+        { "type": "product", "settings": { "image_asset": "gg-f-georgie.png", "title": "GEORGIE CRYSTAL DENIM JACKET", "price": "$234.00" } },
+        { "type": "product", "settings": { "image_asset": "gg-f-gaby.png", "title": "GABY CONTRAST SHERPA JACKET", "price": "$134.00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,103 @@
+<footer class="gg-footer">
+  <div class="gg-container">
+    <div class="gg-footer__top">
+      <div class="gg-footer__brand">
+        <a href="{{ routes.root_url }}">
+          <svg class="gg-logo-mark" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="vertical-align:-8px;margin-right:4px;">
+            <path d="M20 2 6 28h11l3-6m0 6 3 6h11L20 2Z" fill="#F26728"/>
+          </svg>
+          {{ settings.gg_brand_name | default: 'g/g' }}
+        </a>
+        <div class="gg-footer__socials">
+          <a href="{{ settings.gg_social_link | default: '#' }}" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="{{ settings.gg_social_link | default: '#' }}" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V5h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1Z"/></svg>
+          </a>
+          <a href="{{ settings.gg_social_link | default: '#' }}" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2.2 1.7 3.9 4 4.3v3c-1.6 0-3-.5-4-1.3v6.7C16 18.4 13.6 21 10.3 21 7.4 21 5 19 5 16.4c0-2.7 2.5-4.7 5.3-4.4v3c-.6-.2-1.2-.1-1.6.3-.4.4-.6 1-.2 1.5.3.4 1 .6 1.5.2.6-.4.9-1.1.9-1.9V3h4.1Z"/></svg>
+          </a>
+          <a href="{{ settings.gg_social_link | default: '#' }}" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-3.4 17.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.6 2.2-.9 3.4-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1a4.4 4.4 0 0 0-4.6 4.4c0 .8.3 1.7.7 2.2l-.3 1.1c-.1.4-.3.5-.6.3-1.2-.6-2-2.3-2-3.8A6.5 6.5 0 0 1 12 5.4a5.4 5.4 0 0 1 5.8 5.4c0 3.2-2 5.8-4.8 5.8-.9 0-1.8-.5-2.1-1.1l-.6 2.2c-.2.8-.8 1.8-1.2 2.4A9 9 0 1 0 12 3Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="gg-footer__column-header">Catalog</h4>
+        <ul class="gg-footer__links">
+          {%- assign gg_fm = linklists[settings.gg_menu_catalog] -%}
+          {%- for link in gg_fm.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- else -%}
+            <li><a href="{{ routes.collections_url }}">Pullover</a></li>
+            <li><a href="{{ routes.collections_url }}">Jacket</a></li>
+            <li><a href="{{ routes.collections_url }}">Sweater</a></li>
+            <li><a href="{{ routes.collections_url }}">New Arrivals</a></li>
+            <li><a href="{{ routes.collections_url }}">Sale</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="gg-footer__column-header">Customers</h4>
+        <ul class="gg-footer__links">
+          {%- assign gg_fcustomers = linklists[settings.gg_menu_customers] -%}
+          {%- for link in gg_fcustomers.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- else -%}
+            <li><a href="{{ routes.root_url }}">Shipping Information</a></li>
+            <li><a href="{{ routes.root_url }}">Return &amp; Exchange</a></li>
+            <li><a href="{{ routes.root_url }}">Order Tracking</a></li>
+            <li><a href="{{ routes.root_url }}">Help Center</a></li>
+            <li><a href="{{ routes.root_url }}">Store Locations</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="gg-footer__column-header">Brand</h4>
+        <ul class="gg-footer__links">
+          {%- assign gg_fbrand = linklists[settings.gg_menu_brand] -%}
+          {%- for link in gg_fbrand.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- else -%}
+            <li><a href="{{ routes.root_url }}">About us</a></li>
+            <li><a href="{{ routes.root_url }}">Who we are</a></li>
+            <li><a href="{{ routes.root_url }}">Contact us</a></li>
+            <li><a href="{{ routes.root_url }}">FAQ</a></li>
+            <li><a href="{{ shop.url | append: '/blogs/news' }}">Blog</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+
+    <div class="gg-footer__bottom">
+      <div>
+        <ul class="gg-footer__legal">
+          <li><a href="{{ routes.root_url }}">Terms of Service</a></li>
+          <li><a href="{{ routes.root_url }}">Cookie Policy</a></li>
+          <li><a href="{{ routes.root_url }}">Privacy Policy</a></li>
+        </ul>
+        <button type="button" class="gg-footer__lang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.2 3.9 5.4 3.9 9S14.5 18.8 12 21m0-18c-2.5 2.2-3.9 5.4-3.9 9s1.4 6.8 3.9 9"/></svg>
+          Eng
+        </button>
+      </div>
+
+      <div>
+        <h3 class="gg-footer__news-title">{{ settings.gg_news_heading | default: 'Be the first to know about our<br>special offers' }}</h3>
+        <form class="gg-footer__form">
+          <input type="text" name="name" placeholder="Your Name" aria-label="Your Name">
+          <input type="email" name="email" placeholder="login@email.com" aria-label="Email">
+          <button type="button">{{ settings.gg_news_btn | default: 'Sign up' }}</button>
+        </form>
+        <div class="gg-footer__consent">
+          <input type="checkbox" id="gg-privacy">
+          <label for="gg-privacy">I agree to the privacy policy</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

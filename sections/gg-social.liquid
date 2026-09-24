@@ -1,0 +1,36 @@
+<section class="gg-section gg-social">
+  <div class="gg-container">
+    <div class="gg-head-row">
+      <div class="gg-head-row__left">
+        <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Stay Social' }}</span>
+        <h2 class="gg-h--serif" style="font-size:clamp(34px,3.6vw,56px);">{{ section.settings.title | default: 'Show us how you wear g/g.' }}</h2>
+      </div>
+      <div class="gg-head-row__right">
+        <a class="gg-btn gg-btn--secondary gg-btn--serif gg-btn--round" href="{{ section.settings.follow_link | default: '#' }}">
+          {{ section.settings.follow_label | default: 'Follow us' }}
+        </a>
+      </div>
+    </div>
+
+    <div class="gg-social__grid">
+      {%- for i in (1..7) -%}
+        <a href="{{ section.settings.follow_link | default: '#' }}" aria-label="Social image {{ i }}">
+          <img src="{{ 'gg-social-' | append: i | append: '.png' | asset_url }}" alt="Social image {{ i }}" loading="lazy" width="440" height="440">
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Social Community",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stay Social" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Show us how you wear g/g." },
+    { "type": "text", "id": "follow_label", "label": "Follow label", "default": "Follow us" },
+    { "type": "url", "id": "follow_link", "label": "Follow link" }
+  ],
+  "presets": [{ "name": "G/G Social Community" }]
+}
+{% endschema %}

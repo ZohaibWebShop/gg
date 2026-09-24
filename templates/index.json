@@ -1,0 +1,419 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gg_header": {
+      "type": "gg-header",
+      "settings": {}
+    },
+    "gg_hero": {
+      "type": "gg-hero",
+      "settings": {
+        "image_desktop": "shopify://shop_images/Background.png",
+        "image_mobile": "shopify://shop_images/Pasted_image.png",
+        "ghost_text": "Her\nStandard",
+        "heading_desktop": "Wear your<br>colors, own<br>your moment",
+        "heading_mobile": "Elevated women’s college apparel for everyday style",
+        "subtext": "Discover college apparel designed for women who take their school spirit beyond the stands and into their everyday lives.",
+        "btn_desktop": "Shop the g/g collection on Amazon",
+        "btn_mobile": "Shop the g/g Collection",
+        "btn_link": ""
+      }
+    },
+    "gg_shop_by_team": {
+      "type": "gg-shop-by-team",
+      "blocks": {
+        "d1": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-miranda.png",
+            "title": "MIRANDA OVERSIZED FLEECE CREW",
+            "price": "$62.00",
+            "link": ""
+          }
+        },
+        "d2": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-willow.png",
+            "title": "WILLOW FASHION CAMO SHERPA HOODIE",
+            "price": "$78.00",
+            "link": ""
+          }
+        },
+        "d3": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-wallace.png",
+            "title": "WALLACE CLASSIC CAMO FIELD JACKET",
+            "price": "$113.00",
+            "link": ""
+          }
+        },
+        "d4": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-winona.png",
+            "title": "WINONA CLASSIC CAMO SPORT DRESS",
+            "price": "$80.00",
+            "link": ""
+          }
+        },
+        "d5": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-shea.png",
+            "title": "SHEA TEAM JACQUARD CARDIGAN",
+            "price": "$136.00",
+            "link": ""
+          }
+        },
+        "d6": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-sylvie.png",
+            "title": "SYLVIE NAME SLEEVE SWEATER",
+            "price": "$158.00",
+            "link": ""
+          }
+        },
+        "d7": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-georgie.png",
+            "title": "GEORGIE CRYSTAL DENIM JACKET",
+            "price": "$234.00",
+            "link": ""
+          }
+        },
+        "d8": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-gaby.png",
+            "title": "GABY CONTRAST SHERPA JACKET",
+            "price": "$134.00",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d8"
+      ],
+      "settings": {
+        "eyebrow": "Shop by Team",
+        "title": "Who Are You Repping?",
+        "subtext": "Your team is more than a logo. It’s part of your story.",
+        "team_btn": "Select Your Team",
+        "team_link": "",
+        "teams_count": "Total Teams: 19",
+        "show_all": "Show all teams",
+        "load_btn": "Load More ...",
+        "load_link": ""
+      }
+    },
+    "gg_featured_collection": {
+      "type": "gg-featured-collection",
+      "blocks": {
+        "f1": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-f-sylvie.png",
+            "title": "SYLVIE NAME SLEEVE SWEATER",
+            "price": "$158.00",
+            "link": ""
+          }
+        },
+        "f2": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-f-georgie.png",
+            "title": "GEORGIE CRYSTAL DENIM JACKET",
+            "price": "$234.00",
+            "link": ""
+          }
+        },
+        "f3": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-f-gaby.png",
+            "title": "GABY CONTRAST SHERPA JACKET",
+            "price": "$134.00",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "eyebrow": "Featured Collection",
+        "title": "Women’s College Apparel, g/g Style",
+        "subtext": "From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do.",
+        "cta_label": "Shop the Collection",
+        "cta_link": ""
+      }
+    },
+    "gg_category": {
+      "type": "gg-category",
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "image_asset": "gg-cat-sweater.png",
+            "title": "The Sweater",
+            "subtext": "Oversized, cozy, and anything but basic.",
+            "cta": "SHOP SWEATERS",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "image_asset": "gg-cat-hoodie.png",
+            "title": "The Hoodie",
+            "subtext": "Your go-to layer for every chilly kickoff.",
+            "cta": "SHOP HOODIES",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "image_asset": "gg-cat-tee.png",
+            "title": "The Baby Tee",
+            "subtext": "Small tee, big school spirit.",
+            "cta": "SHOP TEES",
+            "link": ""
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "image_asset": "gg-cat-jacket.png",
+            "title": "The Statement Jacket",
+            "subtext": "School colors made to stand out anywhere.",
+            "cta": "SHOP Jackets",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "title": "Your Starting Lineup",
+        "all_label": "Explore All Products",
+        "all_link": ""
+      }
+    },
+    "gg_lifestyle": {
+      "type": "gg-lifestyle",
+      "settings": {
+        "title": "School Spirit That Goes Where You Go",
+        "subtext": "g/g makes collegiate style for beyond game day, with pieces designed to feel just as right in the stands as they do everywhere else.",
+        "banner_heading": "HELLO GORGEOUS",
+        "cta_label": "GET THE LOOK",
+        "cta_link": ""
+      }
+    },
+    "gg_new_arrivals": {
+      "type": "gg-new-arrivals",
+      "blocks": {
+        "n1": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-miranda.png",
+            "title": "MIRANDA OVERSIZED FLEECE CREW",
+            "price": "$62.00",
+            "link": ""
+          }
+        },
+        "n2": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-willow.png",
+            "title": "WILLOW FASHION CAMO SHERPA HOODIE",
+            "price": "$78.00",
+            "link": ""
+          }
+        },
+        "n3": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-wallace.png",
+            "title": "WALLACE CLASSIC CAMO FIELD JACKET",
+            "price": "$113.00",
+            "link": ""
+          }
+        },
+        "n4": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-winona.png",
+            "title": "WINONA CLASSIC CAMO SPORT DRESS",
+            "price": "$80.00",
+            "link": ""
+          }
+        },
+        "n5": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-shea.png",
+            "title": "SHEA TEAM JACQUARD CARDIGAN",
+            "price": "$136.00",
+            "link": ""
+          }
+        },
+        "n6": {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-p-gaby.png",
+            "title": "GABY CONTRAST SHERPA JACKET",
+            "price": "$134.00",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6"
+      ],
+      "settings": {
+        "eyebrow": "New Arrivals",
+        "title": "JUST LANDED",
+        "subtext": "New styles. Same school pride.",
+        "all_label": "View All",
+        "all_link": ""
+      }
+    },
+    "gg_fashion_statement": {
+      "type": "gg-fashion-statement",
+      "settings": {
+        "eyebrow": "Fashion Statement",
+        "title": "From Game Day<br>to Every Day",
+        "link_label": "EXPLORE g/g",
+        "link": "",
+        "quote": "“g/g takes women’s college apparel to the next level. Think elevated layers, feminine silhouettes, playful details, and statement-making team styles designed for women who want to rep their team confidently in their everyday lives.”"
+      }
+    },
+    "gg_cta": {
+      "type": "gg-cta",
+      "settings": {
+        "title": "Your team is calling,<br>your outfit is waiting",
+        "serif": "Wear it like you mean it.",
+        "subtext": "Discover college fan staples and statement styles designed to keep your school part of your everyday wardrobe.",
+        "pr_label": "SHOP g/g",
+        "pr_link": "",
+        "sc_label": "Shop Your Team",
+        "sc_link": ""
+      }
+    },
+    "gg_amazon": {
+      "type": "gg-amazon",
+      "blocks": {
+        "a1": {
+          "type": "amazon",
+          "settings": {
+            "image_asset": "gg-am-1.png",
+            "badge": "Other",
+            "title": "WINONA CLASSIC CAMO SPORT DRESS",
+            "reviews": "5.0 (1.2k Reviews)",
+            "price": "$80.00",
+            "cart_label": "Add to Cart",
+            "buy_label": "Buy Now",
+            "buy_link": ""
+          }
+        },
+        "a2": {
+          "type": "amazon",
+          "settings": {
+            "image_asset": "gg-am-2.png",
+            "badge": "Other",
+            "title": "WENDY FASHION CAMO H2O HALF-ZIP",
+            "reviews": "5.0 (1.2k Reviews)",
+            "price": "$88.00",
+            "cart_label": "Add to Cart",
+            "buy_label": "Buy Now",
+            "buy_link": ""
+          }
+        },
+        "a3": {
+          "type": "amazon",
+          "settings": {
+            "image_asset": "gg-p-willow.png",
+            "badge": "Other",
+            "title": "WILLOW FASHION CAMO SHERPA HOODIE",
+            "reviews": "5.0 (1.2k Reviews)",
+            "price": "$78.00",
+            "cart_label": "Add to Cart",
+            "buy_label": "Buy Now",
+            "buy_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "settings": {
+        "eyebrow": "Amazon Shopping",
+        "title": "SEE SOMETHING YOU LOVE?",
+        "subtext": "Shop g/g on Amazon and find school styles perfect for any occasion.",
+        "cta_label": "SHOP ON AMAZON",
+        "cta_link": "",
+        "note": "Available styles and purchasing are through Amazon."
+      }
+    },
+    "gg_social": {
+      "type": "gg-social",
+      "settings": {
+        "eyebrow": "Stay Social",
+        "title": "Show us how you wear g/g.",
+        "follow_label": "Follow us",
+        "follow_link": ""
+      }
+    },
+    "gg_footer": {
+      "type": "gg-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "gg_header",
+    "gg_hero",
+    "gg_shop_by_team",
+    "gg_featured_collection",
+    "gg_category",
+    "gg_lifestyle",
+    "gg_new_arrivals",
+    "gg_fashion_statement",
+    "gg_cta",
+    "gg_amazon",
+    "gg_social",
+    "gg_footer"
+  ]
+}

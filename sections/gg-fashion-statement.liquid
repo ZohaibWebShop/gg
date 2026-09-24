@@ -1,0 +1,36 @@
+<section class="gg-section gg-fashionsec">
+  <div class="gg-container">
+    <div class="gg-fashion">
+      <div class="gg-fashion__media">
+        <div class="gg-fashion__bg" style="background-image:url('{{ section.settings.image | default: 'gg-fashion-left.png' | asset_url }}')"></div>
+        <div class="gg-fashion__tint"></div>
+        <div class="gg-fashion__body">
+          <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Fashion Statement' }}</span>
+          <h2 class="gg-fashion__title">{{ section.settings.title | default: 'From Game Day<br>to Every Day' }}</h2>
+          <a class="gg-fashion__link" href="{{ section.settings.link | default: routes.collections_url }}">
+            {{ section.settings.link_label | default: 'EXPLORE g/g' }} →
+          </a>
+        </div>
+      </div>
+
+      <blockquote class="gg-fashion__quote">
+        {{ section.settings.quote | default: '“g/g takes women’s college apparel to the next level. Think elevated layers, feminine silhouettes, playful details, and statement-making team styles designed for women who want to rep their team confidently in their everyday lives.”' }}
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Fashion Statement",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fashion Statement" },
+    { "type": "text", "id": "title", "label": "Title", "default": "From Game Day<br>to Every Day" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "EXPLORE g/g" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "“g/g takes women’s college apparel to the next level. Think elevated layers, feminine silhouettes, playful details, and statement-making team styles designed for women who want to rep their team confidently in their everyday lives.”" }
+  ],
+  "presets": [{ "name": "G/G Fashion Statement" }]
+}
+{% endschema %}

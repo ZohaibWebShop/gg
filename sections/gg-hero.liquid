@@ -1,0 +1,59 @@
+<section class="gg-hero">
+  <div class="gg-hero__ghost" aria-hidden="true">{{ section.settings.ghost_text | default: "Her\nStandard" }}</div>
+
+  <div class="gg-hero__img">
+    <picture>
+      {%- assign gg_hero_img = section.settings.image_desktop | default: section.settings.image_mobile -%}
+      {%- assign gg_hero_img_mobile = section.settings.image_mobile | default: section.settings.image_desktop -%}
+      {%- if gg_hero_img != blank -%}
+        {%- if gg_hero_img_mobile != blank -%}
+          <source media="(max-width:768px)" srcset="{{ gg_hero_img_mobile | image_url: width: 1200 }}">
+        {%- endif -%}
+        <img
+          src="{{ gg_hero_img | image_url: width: 2000 }}"
+          srcset="{{ gg_hero_img | image_url: width: 2000 }} 1x, {{ gg_hero_img | image_url: width: 3840 }} 2x"
+          alt="{{ gg_hero_img.alt | escape | default: "Women's g/g college apparel" }}"
+          width="{{ gg_hero_img.width }}"
+          height="{{ gg_hero_img.height }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'gg-hero-bg.png' | asset_url }}"
+          alt="Women's g/g college apparel"
+          loading="eager"
+        >
+      {%- endif -%}
+    </picture>
+  </div>
+
+  <div class="gg-hero__content">
+    <h1 class="gg-hero__title">
+      <span class="d">{{ section.settings.heading_desktop | default: 'Wear your<br>colors, own<br>your moment' }}</span>
+      <span class="m">{{ section.settings.heading_mobile | default: "Elevated women's college apparel for everyday style" }}</span>
+    </h1>
+    <p class="gg-hero__text">{{ section.settings.subtext | default: 'Discover college apparel designed for women who take their school spirit beyond the stands and into their everyday lives.' }}</p>
+    <a class="gg-hero__btn" href="{{ section.settings.btn_link | default: routes.collections_url }}">
+      <span class="d">{{ section.settings.btn_desktop | default: 'Shop the g/g collection on Amazon' }}</span>
+      <span class="m">{{ section.settings.btn_mobile | default: 'Shop the g/g Collection' }}</span>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image_desktop", "label": "Desktop image", "info": "Right side hero photo (fades into background)." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "Optional. Shown below 768px." },
+    { "type": "textarea", "id": "ghost_text", "label": "Ghost watermark", "default": "Her\nStandard", "info": "Use a line break between words to split lines." },
+    { "type": "textarea", "id": "heading_desktop", "label": "Heading (desktop)", "default": "Wear your<br>colors, own<br>your moment" },
+    { "type": "text", "id": "heading_mobile", "label": "Heading (mobile)", "default": "Elevated women's college apparel for everyday style" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Discover college apparel designed for women who take their school spirit beyond the stands and into their everyday lives." },
+    { "type": "text", "id": "btn_desktop", "label": "Button label (desktop)", "default": "Shop the g/g collection on Amazon" },
+    { "type": "text", "id": "btn_mobile", "label": "Button label (mobile)", "default": "Shop the g/g Collection" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "G/G Hero" }]
+}
+{% endschema %}
