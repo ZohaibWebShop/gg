@@ -24,8 +24,8 @@
           </div>
           <div class="gg-amz-card__price">{{ block.settings.price }}</div>
           <div class="gg-amz-card__actions">
-            <a class="gg-btn gg-btn--primary" href="{{ block.settings.buy_link | default: 'https://www.amazon.com' }}">{{ block.settings.cart_label | default: 'Add to Cart' }}</a>
-            <a class="gg-btn gg-btn--buy" href="{{ block.settings.buy_link | default: 'https://www.amazon.com' }}">{{ block.settings.buy_label | default: 'Buy Now' }}</a>
+            <a class="gg-btn gg-btn--primary" href="{{ block.settings.buy_link | default: 'https://www.amazon.com' }}" target="_blank" rel="noopener noreferrer">{{ block.settings.cart_label | default: 'Add to Cart' }}</a>
+            <a class="gg-btn gg-btn--buy" href="{{ block.settings.buy_link | default: 'https://www.amazon.com' }}" target="_blank" rel="noopener noreferrer">{{ block.settings.buy_label | default: 'Buy Now' }}</a>
           </div>
         </div>
       {%- endfor -%}
@@ -33,7 +33,7 @@
 
     <div class="gg-amazon__foot">
       {%- if section.settings.cta_label != blank -%}
-        <a class="gg-btn gg-btn--primary" href="{{ section.settings.cta_link | default: 'https://www.amazon.com' }}">
+        <a class="gg-btn gg-btn--primary" href="{{ section.settings.cta_link | default: 'https://www.amazon.com' }}" target="_blank" rel="noopener noreferrer">
           {{ section.settings.cta_label }}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </a>

@@ -1,5 +1,7 @@
 <section class="gg-hero">
-  <div class="gg-hero__ghost" aria-hidden="true">{{ section.settings.ghost_text | default: "Her\nStandard" }}</div>
+  {%- if section.settings.ghost_text != blank -%}
+    <div class="gg-hero__ghost" aria-hidden="true">{{ section.settings.ghost_text }}</div>
+  {%- endif -%}
 
   <div class="gg-hero__img">
     <picture>
@@ -32,11 +34,30 @@
       <span class="d">{{ section.settings.heading_desktop | default: 'Wear your<br>colors, own<br>your moment' }}</span>
       <span class="m">{{ section.settings.heading_mobile | default: "Elevated women's college apparel for everyday style" }}</span>
     </h1>
-    <p class="gg-hero__text">{{ section.settings.subtext | default: 'Discover college apparel designed for women who take their school spirit beyond the stands and into their everyday lives.' }}</p>
-    <a class="gg-hero__btn" href="{{ section.settings.btn_link | default: routes.collections_url }}">
-      <span class="d">{{ section.settings.btn_desktop | default: 'Shop the g/g collection on Amazon' }}</span>
-      <span class="m">{{ section.settings.btn_mobile | default: 'Shop the g/g Collection' }}</span>
-    </a>
+    {%- if section.settings.subheading != blank -%}
+      <h2 class="gg-hero__subheading">{{ section.settings.subheading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="gg-hero__text">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+    {%- liquid
+      assign gg_hero_btn_label_d = section.settings.btn_desktop | strip
+      assign gg_hero_btn_label_m = section.settings.btn_mobile | strip
+      if gg_hero_btn_label_d != blank or gg_hero_btn_label_m != blank
+        assign gg_hero_btn_show = true
+      endif
+    -%}
+    {%- if gg_hero_btn_show -%}
+      <a class="gg-hero__btn" href="{{ section.settings.btn_link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: section.settings.btn_link %}>
+        {%- if gg_hero_btn_label_d != blank -%}
+          <span class="d">{{ gg_hero_btn_label_d }}</span>
+        {%- endif -%}
+        {%- if gg_hero_btn_label_m != blank -%}
+          <span class="m">{{ gg_hero_btn_label_m }}</span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
   </div>
 </section>
 
@@ -46,9 +67,10 @@
   "settings": [
     { "type": "image_picker", "id": "image_desktop", "label": "Desktop image", "info": "Right side hero photo (fades into background)." },
     { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "Optional. Shown below 768px." },
-    { "type": "textarea", "id": "ghost_text", "label": "Ghost watermark", "default": "Her\nStandard", "info": "Use a line break between words to split lines." },
+    { "type": "textarea", "id": "ghost_text", "label": "Ghost watermark", "info": "Leave blank to hide the watermark. Use a line break between words to split lines." },
     { "type": "textarea", "id": "heading_desktop", "label": "Heading (desktop)", "default": "Wear your<br>colors, own<br>your moment" },
     { "type": "text", "id": "heading_mobile", "label": "Heading (mobile)", "default": "Elevated women's college apparel for everyday style" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Collegiate apparel, reimagined for everyday wear" },
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Discover college apparel designed for women who take their school spirit beyond the stands and into their everyday lives." },
     { "type": "text", "id": "btn_desktop", "label": "Button label (desktop)", "default": "Shop the g/g collection on Amazon" },
     { "type": "text", "id": "btn_mobile", "label": "Button label (mobile)", "default": "Shop the g/g Collection" },

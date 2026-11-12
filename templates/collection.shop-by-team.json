@@ -1,0 +1,196 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner_intro": {
+      "type": "gg-team-collection-banner",
+      "settings": {
+        "use_collection_image": true,
+        "image_desktop": "shopify://shop_images/Background_1.png",
+        "ghost_text": "",
+        "intro_eyebrow": "SHOP BY TEAM",
+        "heading": "",
+        "heading_desktop": "",
+        "heading_mobile": "",
+        "fallback_description": "<p>Your team is more than a logo. It’s part of your story. Find your colors and wear them like you mean it.</p>",
+        "use_collection_image_as_logo_fallback": false,
+        "btn_desktop": "",
+        "btn_mobile": "",
+        "btn_link": ""
+      }
+    },
+    "team_products": {
+      "type": "gg-team-products",
+      "blocks": {
+        "d1": {
+          "type": "product",
+          "settings": {
+            "product": "gg-womens-ncaa-cable-knit-pom-beanie",
+            "image_asset": "gg-p-miranda.png",
+            "title": "MIRANDA OVERSIZED FLEECE CREW",
+            "link": ""
+          }
+        },
+        "d2": {
+          "type": "product",
+          "settings": {
+            "product": "gg-womens-ncaa-cable-turtleneck-sweater",
+            "image_asset": "gg-p-willow.png",
+            "title": "WILLOW FASHION CAMO SHERPA HOODIE",
+            "link": ""
+          }
+        },
+        "d3": {
+          "type": "product",
+          "settings": {
+            "product": "gg-womens-ncaa-crewneck-intarsia-name-repeat-sweater",
+            "image_asset": "gg-p-wallace.png",
+            "title": "WALLACE CLASSIC CAMO FIELD JACKET",
+            "link": ""
+          }
+        },
+        "d4": {
+          "type": "product",
+          "settings": {
+            "product": "gg-womens-ncaa-crewneck-varsity-stripe-sweater",
+            "image_asset": "gg-p-winona.png",
+            "title": "WINONA CLASSIC CAMO SPORT DRESS",
+            "link": ""
+          }
+        },
+        "d5": {
+          "type": "product",
+          "settings": {
+            "product": "gg-womens-ncaa-fashion-scarf",
+            "image_asset": "gg-p-shea.png",
+            "title": "SHEA TEAM JACQUARD CARDIGAN",
+            "link": ""
+          }
+        },
+        "d6": {
+          "type": "product",
+          "settings": {
+            "product": "gg-womens-ncaa-puffer-jacket",
+            "image_asset": "gg-p-sylvie.png",
+            "title": "SYLVIE NAME SLEEVE SWEATER",
+            "link": ""
+          }
+        },
+        "d7": {
+          "type": "product",
+          "settings": {
+            "product": "womens-ncaa-puffer-vest",
+            "image_asset": "gg-p-georgie.png",
+            "title": "GEORGIE CRYSTAL DENIM JACKET",
+            "link": ""
+          }
+        },
+        "d8": {
+          "type": "product",
+          "settings": {
+            "product": "womens-ncaa-quarter-zip-fleece-sweatshirt",
+            "image_asset": "gg-p-gaby.png",
+            "title": "GABY CONTRAST SHERPA JACKET",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d8"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "title": "",
+        "subtext": "",
+        "products_collection": "",
+        "products_to_show": 8,
+        "show_price": true,
+        "no_products": "No products found for this team.",
+        "load_btn": "Load More ...",
+        "load_link": "",
+        "load_done_btn": "Shop the collection on Amazon",
+        "load_amz": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925"
+      }
+    },
+    "gg_about": {
+      "type": "gg-about",
+      "settings": {
+        "title": "From Game Day to Every Day",
+        "quote": "<p>g/g is a women-owned design house creating collegiate apparel for women who want to show their school pride without leaving their personal style behind.&nbsp;<br/><br/>Designed by women, for women, our pieces go beyond the basic tees and traditional fanwear. We believe being a fan shouldn't mean settling for boxy fits, basic tees, or apparel designed with someone else in mind. That's why we create elevated, fashion-forward styles made with women, current trends, and real life in mind.<br/><br/>Your love for your alma mater doesn't end on campus. g/g is made to be worn anywhere, from game days to in the office, out with friends, and wherever else life takes you next.<br/><br/>Wherever you're headed, wear it like you mean it.</p>",
+        "btn_label": "Shop g/g on Amazon",
+        "btn_link": "https://www.amazon.com/dp/B0HG6GWK2P?th=1&psc=1"
+      }
+    },
+    "gg_faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g college apparel officially licensed?",
+            "answer": "<p>Yes, g/g offers officially licensed women’s college apparel designed for women to represent their schools with authentic team pride and elevated personal style. Shop by team to find available styles and collections for your school.&nbsp;</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What types of women’s college apparel does g/g offer?",
+            "answer": "<p>g/g offers fashion-forward collegiate apparel designed specifically for women, with styles ranging from sweaters, hoodies, and baby tees to statement jackets and other seasonal favorites. Explore new arrivals and shop by team to see the latest styles available for your school.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I wear g/g college apparel beyond game day?",
+            "answer": "<p>Absolutely. g/g is designed around game day to every day. Our elevated layers, modern silhouettes, and versatile styles make it easy to show your school pride at the game, around campus, at the office, or anywhere else you may go.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find apparel for my college or team?",
+            "answer": "<p>Use Shop by Team to find g/g apparel available for your school. Choose your team to explore current styles, new arrivals, and collegiate favorites in your school colors.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g college apparel designed specifically for women?",
+            "answer": "<p>Yes. g/g is a women-owned design house creating collegiate apparel designed by women, for women. At g/g, we create elevated, trend-driven pieces with women’s style and everyday comfort and wearability in mind.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "title": "FAQs"
+      }
+    }
+  },
+  "order": [
+    "banner_intro",
+    "team_products",
+    "gg_about",
+    "gg_faq"
+  ]
+}

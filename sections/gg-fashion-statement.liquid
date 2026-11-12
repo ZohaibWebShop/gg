@@ -1,14 +1,20 @@
 <section class="gg-section gg-fashionsec">
+  {%- if section.settings.image != blank -%}
+    {%- assign fashion_image = section.settings.image | image_url: width: 1600 -%}
+  {%- else -%}
+    {%- assign fashion_image = 'gg-fashion-left.png' | asset_url -%}
+  {%- endif -%}
   <div class="gg-container">
     <div class="gg-fashion">
       <div class="gg-fashion__media">
-        <div class="gg-fashion__bg" style="background-image:url('{{ section.settings.image | default: 'gg-fashion-left.png' | asset_url }}')"></div>
+        <div class="gg-fashion__bg" style="background-image:url('{{ fashion_image }}')"></div>
         <div class="gg-fashion__tint"></div>
         <div class="gg-fashion__body">
           <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Fashion Statement' }}</span>
           <h2 class="gg-fashion__title">{{ section.settings.title | default: 'From Game Day<br>to Every Day' }}</h2>
-          <a class="gg-fashion__link" href="{{ section.settings.link | default: routes.collections_url }}">
-            {{ section.settings.link_label | default: 'EXPLORE g/g' }} →
+          <a class="gg-fashion__link" href="{{ section.settings.link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: section.settings.link %}>
+            {{ section.settings.link_label | default: 'Explore g/g' }}
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M24.5208 12.5L17.0316 19.9892L15.2638 18.2214L19.6915 13.7937L4.522 13.7145L4.56711 11.2404L19.8439 11.322L15.2035 6.68159L16.9529 4.93219L24.5208 12.5Z" fill="#F26728"/></svg>
           </a>
         </div>
       </div>
@@ -27,7 +33,7 @@
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fashion Statement" },
     { "type": "text", "id": "title", "label": "Title", "default": "From Game Day<br>to Every Day" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "EXPLORE g/g" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore g/g" },
     { "type": "url", "id": "link", "label": "Link" },
     { "type": "textarea", "id": "quote", "label": "Quote", "default": "“g/g takes women’s college apparel to the next level. Think elevated layers, feminine silhouettes, playful details, and statement-making team styles designed for women who want to rep their team confidently in their everyday lives.”" }
   ],

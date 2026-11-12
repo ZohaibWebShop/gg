@@ -9,8 +9,9 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Logo.png",
-    "logo_width": 90,
+    "logo": "shopify://shop_images/10b619ab-6077-4126-887b-90d2f6ee0fca_removalai_preview.png",
+    "logo_width": 70,
+    "favicon": "shopify://shop_images/Gemini_Generated_Image_tf89jrtf89jrtf89.png",
     "type_header_font": "montserrat_n8",
     "heading_scale": 100,
     "type_body_font": "montserrat_n4",
@@ -109,8 +110,8 @@
     "brand_headline": "",
     "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_facebook_link": "",
-    "social_instagram_link": "",
+    "social_facebook_link": "https://www.facebook.com/people/Gg/61593305604273/",
+    "social_instagram_link": "https://www.instagram.com/ggstyleofficial",
     "social_youtube_link": "",
     "social_tiktok_link": "",
     "social_twitter_link": "",
@@ -128,6 +129,11 @@
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
     "customer_account_menu": "customer-account-main-menu",
+    "gg_menu_catalog": "footer",
+    "gg_menu_catalog_title": "Discover",
+    "gg_menu_customers": "",
+    "gg_menu_customers_title": "",
+    "amazon_hide_add_to_cart": true,
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -143,6 +149,18 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "6129977475812166837": {
+        "type": "shopify://apps/wishlistsuite/blocks/wishlist_embed/c2905ea4-a4c7-46db-b02a-fc294afa02e5",
+        "disabled": false,
+        "settings": {
+          "custom_card_selector": ".gg-card",
+          "custom_cart_item_selector": "",
+          "customcss": "",
+          "customjs": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {

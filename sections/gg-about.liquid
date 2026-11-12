@@ -1,0 +1,32 @@
+<section class="gg-section gg-about">
+  <div class="gg-container">
+    <div class="gg-about__head">
+      {%- if section.settings.title != blank -%}
+        <h1 class="gg-about__title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.quote != blank -%}
+      <blockquote class="gg-about__quote">{{ section.settings.quote }}</blockquote>
+    {%- endif -%}
+
+    {%- if section.settings.btn_label != blank -%}
+      <div class="gg-about__actions">
+        <a class="gg-btn gg-btn--primary gg-btn--serif" href="{{ section.settings.btn_link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: section.settings.btn_link %}>{{ section.settings.btn_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G About Intro",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "From Game Day to Every Day" },
+    { "type": "richtext", "id": "quote", "label": "Quote", "default": "<p>g/g is a women-owned design house creating collegiate apparel for women who want to show their school pride without leaving their personal style behind.</p><p>Designed by women, for women, our pieces go beyond the basic tees and traditional fanwear. We believe being a fan shouldn't mean settling for boxy fits, basic tees, or apparel designed with someone else in mind. That's why we create elevated, fashion-forward styles made with women, current trends, and real life in mind.</p><p>Your love for your alma mater doesn't end on campus. g/g is made to be worn anywhere, from game days to in the office, out with friends, and wherever else life takes you next.</p><p>Wherever you're headed, wear it like you mean it.</p>" },
+    { "type": "text", "id": "btn_label", "label": "Button label" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "G/G About Intro" }]
+}
+{% endschema %}

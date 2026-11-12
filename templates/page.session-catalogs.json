@@ -1,0 +1,159 @@
+{
+  "sections": {
+    "banner": {
+      "type": "gg-page-banner",
+      "settings": {
+        "overlay_opacity": 55,
+        "banner_height": 520,
+        "pretitle": "SESSION CATALOGS",
+        "heading": "Session Catalogs",
+        "description": "<p>Browse our latest session catalogs and discover the collections designed for every moment.</p>",
+        "text_alignment": "center"
+      }
+    },
+    "catalog": {
+      "type": "gg-session-catalog",
+      "settings": {
+        "layout": "alternating",
+        "columns": 2
+      },
+      "blocks": {
+        "catalog-1": {
+          "type": "catalog",
+          "settings": {
+            "pretitle": "SESSION CATALOG",
+            "heading": "Fall / Winter 2027",
+            "description": "<p>Explore the full session catalog and shop the styles designed for the season ahead.</p>",
+            "meta": "<ul><li>Fall Delivery: 7.15.27 - 8.15.27</li><li>Winter Delivery: 9.1.27 - 9.30.27</li><li><strong>Order Deadline: 11.20.26</strong></li></ul>",
+            "cta_label": "View Catalog",
+            "cta_link": "https://cdn.shopify.com/s/files/1/0754/9481/7953/files/FW27_gg_Deck_final_compressed.pdf?v=1793916348"
+          }
+        }
+      },
+      "block_order": [
+        "catalog-1"
+      ]
+    },
+    "social": {
+      "type": "gg-social",
+      "blocks": {
+        "bottom_image_rrpXK8": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/uk_jacket_v2_08_front_alt2.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_FAAfRD": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/michigan_jacket_07_cafe_lifestyle.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_biAkTB": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_21_2026_01_33_55_PM_d1e58128-a8dd-4de3-b42f-f785806c6abd.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_LtprME": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/msu_varsity_jacket_02_front_alt.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_83EzWV": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_21_2026_02_33_22_PM.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_tUzqGe": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/02-three-quarter-black-cutoffs.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_4DgU8j": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/04-white-main.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_yMjWCG": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/07-lifestyle-tagged.jpg",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_FYQDP7": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/02-scarf-ponytail.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_UFpUNe": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/02-tennis-skirt-hero.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_XdhRpw": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/03-back.png",
+            "link": "",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "bottom_image_rrpXK8",
+        "bottom_image_FAAfRD",
+        "bottom_image_biAkTB",
+        "bottom_image_LtprME",
+        "bottom_image_83EzWV",
+        "top_image_tUzqGe",
+        "top_image_4DgU8j",
+        "top_image_yMjWCG",
+        "top_image_FYQDP7",
+        "top_image_UFpUNe",
+        "top_image_XdhRpw"
+      ],
+      "settings": {
+        "eyebrow": "STAY SOCIAL",
+        "title": "SHOW US HOW YOU WEAR g/g.",
+        "follow_label": "Follow us",
+        "follow_link": "https://www.instagram.com/ggstyleofficial/",
+        "source": "manual",
+        "ig_access_token": "",
+        "ig_post_count": 8,
+        "ig_link": ""
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "catalog",
+    "social"
+  ]
+}

@@ -1,72 +1,167 @@
-<section class="gg-section gg-featuredsec">
+<section class="gg-section gg-featuredsec"{% if section.settings.background_image != blank %} style="background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');"{% endif %}>
+  {%- if section.settings.big_image != blank -%}
+    {%- assign big_image = section.settings.big_image | image_url: width: 1200 -%}
+  {%- else -%}
+    {%- assign big_image = 'gg-featured-big.png' | asset_url -%}
+  {%- endif -%}
+  {%- assign featured_image_link = section.settings.image_link | default: section.settings.cta_link | default: routes.collections_url -%}
   <div class="gg-container">
     <div class="gg-featured">
-      <div class="gg-featured__media gg-featured__media--ratio">
-        <img src="{{ section.settings.big_image | default: 'gg-featured-big.png' | asset_url }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="572" height="880">
+      <div class="gg-featured__left">
+        <div class="gg-featured__media gg-featured__media--ratio">
+          <img src="{{ big_image }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="572" height="880">
+          <a class="gg-featured__media-link" href="{{ featured_image_link }}"{% render 'gg-link-attrs', url: featured_image_link %}>
+            <span class="visually-hidden">{{ section.settings.title | default: 'Shop the collection' }}</span>
+          </a>
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <div class="gg-featured__cta-wrap">
+            <a class="gg-btn gg-btn--primary gg-featured__cta" href="{{ section.settings.cta_link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: section.settings.cta_link %}>
+              {{ section.settings.cta_label }}
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M24.5208 12.5L16.033 20.9877L14.0296 18.9843L19.0476 13.9662L1.85551 13.8764L1.90663 11.0725L19.2204 11.1649L13.9612 5.9058L15.9439 3.92315L24.5208 12.5Z" fill="#F1F2EE"/></svg>
+            </a>
+          </div>
+        {%- endif -%}
       </div>
 
       <div class="gg-featured__content">
         <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Featured Collection' }}</span>
-        <h2 class="gg-featured__title">{{ section.settings.title | default: 'Women’s College Apparel, g/g Style' }}</h2>
-        <p class="gg-featured__desc">{{ section.settings.subtext | default: 'From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do.' }}</p>
+        <div class="gg-featured__head">
+          <h2 class="gg-featured__title">{{ section.settings.title | default: 'Women’s College Apparel, g/g Style' }}</h2>
+          <p class="gg-featured__desc">{{ section.settings.subtext | default: 'From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do.' }}</p>
+        </div>
 
         <div class="gg-featured__items">
           {%- for block in section.blocks -%}
-            <a class="gg-card" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+            {%- assign product = block.settings.product -%}
+            {%- assign gg_card_amz = blank -%}
+            {%- if settings.amazon_links_enabled != false -%}
+              {%- capture gg_card_amz -%}{%- render 'gg-amazon-url', product: product -%}{%- endcapture -%}
+              {%- assign gg_card_amz = gg_card_amz | strip -%}
+            {%- endif -%}
+            <a class="gg-card" href="{{ gg_card_amz | default: product.url | default: block.settings.link | default: routes.collections_url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }}>
               <div class="gg-card__media gg-card--auto">
-                <img src="{{ block.settings.image_asset | default: 'gg-f-gaby.png' | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="345" height="460">
+                {%- if product != blank and product.featured_image != blank -%}
+                  <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="345" height="460">
+                {%- else -%}
+                  <img src="{{ block.settings.image_asset | default: 'gg-f-gaby.png' | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="345" height="460">
+                {%- endif -%}
                 <div class="gg-card__top">
                   <span class="gg-card__logo">
-                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.85)"/><path d="M16 6 5 24h6l5-10 5 10h6L16 6Z" fill="#0C3054"/></svg>
-                  </span>
-                  <svg class="gg-card__heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9A5.4 5.4 0 0 1 12 5.8 5.4 5.4 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9Z"/></svg>
+  {% render 'gg-sports-logo', product: block.settings.product %}
+</span>
+                  <svg class="gg-card__heart" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
                 </div>
               </div>
               <div class="gg-card__body">
-                <h3 class="gg-card__title">{{ block.settings.title }}</h3>
-                <div class="gg-card__price">{{ block.settings.price }}</div>
+                <h3 class="gg-card__title">{{ product.title | default: block.settings.title }}</h3>
               </div>
             </a>
           {%- endfor -%}
         </div>
-
-        {%- if section.settings.cta_label != blank -%}
-          <div>
-            <a class="gg-btn gg-btn--primary" href="{{ section.settings.cta_link | default: routes.collections_url }}">
-              {{ section.settings.cta_label }}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-            </a>
-          </div>
-        {%- endif -%}
       </div>
     </div>
   </div>
 </section>
 
-{% schema %}
-{
+{% schema %}{
   "name": "G/G Featured Collection",
   "settings": [
-    { "type": "image_picker", "id": "big_image", "label": "Large image" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured Collection" },
-    { "type": "text", "id": "title", "label": "Title", "default": "Women’s College Apparel, g/g Style" },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do." },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop the Collection" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Leave empty to use the default background."
+    },
+    {
+      "type": "image_picker",
+      "id": "big_image",
+      "label": "Large image"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "Large image link",
+      "info": "Defaults to the CTA link when left empty."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Women\u2019s College Apparel, g/g Style"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
   ],
   "blocks": [
     {
       "type": "product",
       "name": "Product",
       "settings": [
-        { "type": "select", "id": "image_asset", "label": "Default image", "options": [
-          { "value": "gg-f-sylvie.png", "label": "Sylvie name sleeve sweater" },
-          { "value": "gg-f-georgie.png", "label": "Georgie crystal denim jacket" },
-          { "value": "gg-f-gaby.png", "label": "Gaby contrast sherpa jacket" }
-        ] },
-        { "type": "text", "id": "title", "label": "Title", "default": "PRODUCT" },
-        { "type": "text", "id": "price", "label": "Price", "default": "$100.00" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Drives the image, title, price, link and the custom.store_logo metafield. The text/image settings below are only used as a fallback when no product is selected."
+        },
+        {
+          "type": "select",
+          "id": "image_asset",
+          "label": "Default image",
+          "options": [
+            {
+              "value": "gg-f-sylvie.png",
+              "label": "Sylvie name sleeve sweater"
+            },
+            {
+              "value": "gg-f-georgie.png",
+              "label": "Georgie crystal denim jacket"
+            },
+            {
+              "value": "gg-f-gaby.png",
+              "label": "Gaby contrast sherpa jacket"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "PRODUCT"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$100.00"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
@@ -75,11 +170,31 @@
     {
       "name": "G/G Featured Collection",
       "blocks": [
-        { "type": "product", "settings": { "image_asset": "gg-f-sylvie.png", "title": "SYLVIE NAME SLEEVE SWEATER", "price": "$158.00" } },
-        { "type": "product", "settings": { "image_asset": "gg-f-georgie.png", "title": "GEORGIE CRYSTAL DENIM JACKET", "price": "$234.00" } },
-        { "type": "product", "settings": { "image_asset": "gg-f-gaby.png", "title": "GABY CONTRAST SHERPA JACKET", "price": "$134.00" } }
+        {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-f-sylvie.png",
+            "title": "SYLVIE NAME SLEEVE SWEATER",
+            "price": "$158.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-f-georgie.png",
+            "title": "GEORGIE CRYSTAL DENIM JACKET",
+            "price": "$234.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "image_asset": "gg-f-gaby.png",
+            "title": "GABY CONTRAST SHERPA JACKET",
+            "price": "$134.00"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

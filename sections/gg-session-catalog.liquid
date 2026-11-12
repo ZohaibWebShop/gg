@@ -1,0 +1,167 @@
+{%- assign gg_catalog_layout = section.settings.layout | default: 'alternating' -%}
+{%- assign gg_catalog_columns = section.settings.columns | default: 2 -%}
+<section
+  class="gg-section gg-session-catalog gg-session-catalog--{{ gg_catalog_layout }}"
+  style="--gg-catalog-columns: {{ gg_catalog_columns }};"
+>
+  <div class="gg-container">
+    <div class="gg-session-catalog__grid">
+      {%- for block in section.blocks -%}
+        <article class="gg-session-catalog__card" {{ block.shopify_attributes }}>
+          <div class="gg-session-catalog__media">
+            {%- if block.settings.image != blank -%}
+              {%- assign gg_catalog_alt = block.settings.image.alt | default: block.settings.heading -%}
+              {{
+                block.settings.image
+                | image_url: width: 800
+                | image_tag:
+                  widths: '400, 600, 800',
+                  sizes: '(min-width: 900px) 25vw, 100vw',
+                  alt: gg_catalog_alt,
+                  loading: 'lazy'
+              }}
+            {%- else -%}
+              {{
+                'gg-hero-bg.png'
+                | asset_url
+                | image_tag:
+                  width: 3840,
+                  height: 2042,
+                  alt: block.settings.heading,
+                  loading: 'lazy'
+              }}
+            {%- endif -%}
+          </div>
+
+          <div class="gg-session-catalog__content">
+            {%- if block.settings.pretitle != blank -%}
+              <p class="gg-session-catalog__pretitle">{{ block.settings.pretitle }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.heading != blank -%}
+              <h2 class="gg-session-catalog__heading">
+                {%- render 'gg-breaks', text: block.settings.heading, class: 'gg-session-catalog__heading-line' -%}
+              </h2>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <div class="gg-session-catalog__desc rte">{{ block.settings.description }}</div>
+            {%- endif -%}
+
+            {%- if block.settings.meta != blank -%}
+              <div class="gg-session-catalog__meta rte">{{ block.settings.meta }}</div>
+            {%- endif -%}
+
+            {%- if block.settings.cta_label != blank -%}
+              <div class="gg-session-catalog__actions">
+                <a
+                  class="gg-session-catalog__btn"
+                  href="{{ block.settings.cta_link | default: '#' }}"
+                  {%- if block.settings.cta_link != blank %} target="_blank" rel="noopener noreferrer"{% endif -%}
+                >
+                  {{ block.settings.cta_label }}
+                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M24.5205 12.5L16.0328 20.9877L14.0293 18.9843L19.0474 13.9662L1.85526 13.8764L1.90639 11.0725L19.2201 11.1649L13.961 5.9058L15.9437 3.92315L24.5205 12.5Z" fill="currentColor"/></svg>
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Session Catalogs",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Card layout",
+      "options": [
+        {
+          "value": "alternating",
+          "label": "Alternating rows (image left / image right)"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "alternating"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Grid columns",
+      "info": "Used when Card layout is set to Grid.",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "catalog",
+      "name": "Catalog",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Catalog image"
+        },
+        {
+          "type": "text",
+          "id": "pretitle",
+          "label": "Pre-text",
+          "default": "SESSION CATALOG"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Title",
+          "default": "Fall / Winter 2027"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Explore the full session catalog and shop the styles designed for the season ahead.</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "meta",
+          "label": "Delivery dates / details",
+          "info": "Add each line as a list item. Bold a line to highlight it in orange.",
+          "default": "<ul><li>Fall Delivery: 7.15.27 - 8.15.27</li><li>Winter Delivery: 9.1.27 - 9.30.27</li><li><strong>Order Deadline: 11.20.26</strong></li></ul>"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "Button label",
+          "default": "View Catalog"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "PDF link",
+          "info": "Paste the catalog PDF URL here."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "G/G Session Catalogs",
+      "blocks": [
+        {
+          "type": "catalog"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

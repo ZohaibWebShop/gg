@@ -7,6 +7,13 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NG8D576K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -23,7 +30,6 @@
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
     {% if page_description %}
@@ -326,7 +332,32 @@
     </script>
   </head>
 
-  <body class="gradient{% if request.page_type == 'index' %} template-index{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  {%- comment -%}
+    gg-solid-header: only pages WITHOUT a hero at the top need the solid white
+    header bar and the layout offset for it. Pages that do open with a hero
+    (homepage, About) leave it off so the transparent fixed header sits on top
+    of the hero instead of pushing content down.
+    template-page-about: About-page-only styling hooks.
+  {%- endcomment -%}
+  {%- liquid
+    assign gg_is_home = false
+    if request.page_type == 'index' or template.name == 'index'
+      assign gg_is_home = true
+    endif
+    assign gg_is_about = false
+    if template.name == 'page.about' or template.suffix == 'about'
+      assign gg_is_about = true
+    endif
+    assign gg_is_team_collection = false
+    if template.name == 'collection' and template.suffix != blank
+      assign gg_is_team_collection = true
+    endif
+    assign gg_has_hero_header = false
+    if gg_is_home or gg_is_about or gg_is_team_collection
+      assign gg_has_hero_header = true
+    endif
+  -%}
+  <body class="gradient{% if gg_is_home %} template-index{% endif %}{% unless gg_has_hero_header %} gg-solid-header{% endunless %}{% if gg_is_about %} template-page-about{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

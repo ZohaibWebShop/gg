@@ -39,6 +39,18 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+
+    assign gg_amz_url = blank
+    if settings.amazon_links_enabled != false
+      capture gg_amz_capture
+        render 'gg-amazon-url', product: card_product
+      endcapture
+      assign gg_amz_url = gg_amz_capture | strip
+    endif
+    assign gg_amz_suppress_cart = false
+    if settings.amazon_hide_add_to_cart and gg_amz_url != blank
+      assign gg_amz_suppress_cart = true
+    endif
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
@@ -117,7 +129,11 @@
                 {% endif %}
               >
                 <a
-                  href="{{ card_product.url }}"
+                  href="{{ gg_amz_url | default: card_product.url }}"
+                  {% if gg_amz_url != blank %}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  {% endif %}
                   id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
                   class="full-unstyled-link"
                   aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}{% if card_product.available == false or card_product.compare_at_price > card_product.price %} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}{% endif %}"
@@ -154,7 +170,11 @@
               {% endif %}
             >
               <a
-                href="{{ card_product.url }}"
+                href="{{ gg_amz_url | default: card_product.url }}"
+                {% if gg_amz_url != blank %}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                {% endif %}
                 id="CardLink-{{ section_id }}-{{ card_product.id }}"
                 class="full-unstyled-link"
                 aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }}{% if card_product.available == false or card_product.compare_at_price > card_product.price %} Badge-{{ section_id }}-{{ card_product.id }}{% endif %}"
@@ -207,6 +227,12 @@
               {%- endif -%}
 
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- if gg_amz_url != blank -%}
+                <div class="card__amazon">
+                  {%- render 'gg-amazon-button', amazon_url: gg_amz_url, class: 'card__amazon-link' -%}
+                </div>
+              {%- endif -%}
+              {%- unless gg_amz_suppress_cart -%}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid
@@ -288,8 +314,10 @@
                   </quantity-popover>
                 {% endif %}
               {%- endif -%}
+              {%- endunless -%}
             </div>
           </div>
+          {%- unless gg_amz_suppress_cart -%}
           {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
           {% if quick_add == 'standard' %}
             <div class="quick-add no-js-hidden">
@@ -550,6 +578,7 @@
               </div>
             {% endif %}
           {% endif %}
+          {%- endunless -%}
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
               <span

@@ -12,7 +12,7 @@
       <ul class="gg-header__nav">
         {%- for link in gg_nav_menu.links -%}
           <li class="{% if link.links != empty %}gg-has-dropdown{% endif %}">
-            <a href="{{ link.url }}">
+            <a href="{{ link.url }}"{% render 'gg-link-attrs', url: link.url %}>
               {% render 'gg-link-title', title: link.title -%}
               {%- if link.links != empty -%}
                 <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m2.5 5 4.5 4.5L11.5 5"/></svg>
@@ -21,7 +21,7 @@
             {%- if link.links != empty -%}
               <ul class="gg-header__dropdown">
                 {%- for child in link.links -%}
-                  <li><a href="{{ child.url }}">{% render 'gg-link-title', title: child.title -%}</a></li>
+                  <li><a href="{{ child.url }}"{% render 'gg-link-attrs', url: child.url %}>{% render 'gg-link-title', title: child.title -%}</a></li>
                 {%- endfor -%}
               </ul>
             {%- endif -%}
@@ -37,15 +37,21 @@
     </nav>
 
     <div class="gg-header__icons">
+      {% comment %}
       <a href="{{ routes.search_url }}" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg>
       </a>
+      {% endcomment %}
+      {% comment %}
       <a href="{{ routes.account_url }}" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.4-3.4 4.3-5 8-5s6.6 1.6 8 5"/></svg>
       </a>
+      {% endcomment %}
+      {% comment %}
       <a class="gg-header__cart gg-only-desktop" href="{{ routes.cart_url }}" aria-label="Cart">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 12H7.2L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
       </a>
+      {% endcomment %}
     </div>
   </div>
 </header>
@@ -63,7 +69,7 @@
     <ul>
       {%- for link in gg_nav_menu.links -%}
         <li>
-          <a href="{{ link.url }}">
+          <a href="{{ link.url }}"{% render 'gg-link-attrs', url: link.url %}>
             {% render 'gg-link-title', title: link.title -%}
             {%- if link.links != empty -%}
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m2.5 5 4.5 4.5L11.5 5"/></svg>
@@ -72,7 +78,7 @@
           {%- if link.links != empty -%}
             <ul class="gg-header__menu-sub">
               {%- for child in link.links -%}
-                <li><a href="{{ child.url }}">{% render 'gg-link-title', title: child.title -%}</a></li>
+                <li><a href="{{ child.url }}"{% render 'gg-link-attrs', url: child.url %}>{% render 'gg-link-title', title: child.title -%}</a></li>
               {%- endfor -%}
             </ul>
           {%- endif -%}
@@ -88,14 +94,20 @@
   </nav>
 
   <div class="gg-header__menu-icons">
+    {% comment %}
     <a href="{{ routes.search_url }}" aria-label="Search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg>
     </a>
+    {% endcomment %}
+    {% comment %}
     <a href="{{ routes.account_url }}" aria-label="Account">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.4-3.4 4.3-5 8-5s6.6 1.6 8 5"/></svg>
     </a>
+    {% endcomment %}
+    {% comment %}
     <a href="{{ routes.cart_url }}" aria-label="Cart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 12H7.2L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
     </a>
+    {% endcomment %}
   </div>
 </div>

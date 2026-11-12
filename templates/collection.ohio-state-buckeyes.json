@@ -1,0 +1,147 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "gg-team-collection-banner",
+      "settings": {
+        "use_collection_image": true,
+        "image_desktop": "shopify://shop_images/Ohio_State.jpg",
+        "image_mobile": "shopify://shop_images/Ohio_State_mobile.jpg",
+        "ghost_text": "",
+        "intro_eyebrow": "All in for the Buckeyes",
+        "heading": "Ohio State Women’s Apparel",
+        "heading_desktop": "Ohio State Women’s Apparel",
+        "heading_mobile": "Ohio State Women’s Apparel",
+        "description": "",
+        "fallback_description": "",
+        "fallback_logo": "shopify://shop_images/Frame_29.png",
+        "use_collection_image_as_logo_fallback": false,
+        "btn_desktop": "",
+        "btn_mobile": "",
+        "btn_link": ""
+      }
+    },
+    "team_products": {
+      "type": "gg-team-products",
+      "settings": {
+        "eyebrow": "",
+        "show_breadcrumb": true,
+        "breadcrumb_label": "Ohio State Women’s Apparel",
+        "title": "",
+        "subtext": "",
+        "team_logo": "shopify://shop_images/Frame_29.png",
+        "products_collection": "ohio-state-buckeyes",
+        "products_to_show": 8,
+        "show_all_products": true,
+        "show_price": true,
+        "no_products": "Products coming soon.",
+        "load_btn": "View More",
+        "load_link": "",
+        "load_done_btn": "Shop the Ohio State Buckeyes collection on Amazon",
+        "load_amz": "https://www.amazon.com/stores/gg/page/A1249A3A-6615-4557-8AF4-970BEFB8A925"
+      }
+    },
+    "story_1": {
+      "type": "gg-team-story",
+      "settings": {
+        "bg_color": "white",
+        "content_alignment": "center",
+        "eyebrow": "Ohio State Buckeyes",
+        "title": "All in for the Buckeyes",
+        "lead": "",
+        "text": "<p>Bring your Buckeye pride from kickoff at The Shoe to wherever your scarlet and gray spirit takes you next.</p>",
+        "btn_label": "Shop the Ohio State Buckeyes collection on Amazon",
+        "btn_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
+      }
+    },
+    "story_2": {
+      "type": "gg-team-story",
+      "settings": {
+        "bg_color": "alt",
+        "image": "shopify://shop_images/ChatGPT_Image_Oct_5_2026_09_30_40_AM.png",
+        "content_alignment": "center",
+        "eyebrow": "",
+        "title": "Scarlet & Gray, Styled Your Way",
+        "lead": "Your Buckeye legacy is bigger than Saturdays at The Shoe. Your wardrobe can be, too.",
+        "text": "<p>g/g brings a boutique-inspired approach to Ohio State women’s apparel, with sweaters, fleece, puffer styles, sherpa layers, and accessories designed specifically for women. As a women-owned design house, we create elevated fits and silhouettes that make it easy to show your OSU pride without leaving your personal style behind.</p><p>From tailgates and kickoff to campus outings and everyday plans, wear your scarlet and gray like you mean it.</p>",
+        "btn_label": "Shop Ohio State on Amazon",
+        "btn_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
+      }
+    },
+    "faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I shop g/g Ohio State women’s apparel?",
+            "answer": "<p>Shop the g/g Ohio State Buckeyes collection above to explore available styles. Select your favorite Buckeyes gear to shop g/g through Amazon.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What types of Ohio State women’s apparel does g/g offer?",
+            "answer": "<p>The g/g Ohio State collection includes sweaters, fleece tops, sherpa layers, a puffer vest, puffer jacket, H2O jacket, knit pom hat, cotton festival scarf, and more. These easy-to-layer styles give you plenty of options for creating collegiate looks around Ohio State’s iconic scarlet and gray.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are some fun ways to wear the g/g scarf?",
+            "answer": "<p>Our scarf brings a splash of color to any outfit, whether you’re at a Buckeye’s game or enjoying an evening out. For a polished look, wear it around your neck, or tie it in your hair as a headband or ponytail wrap. Or, for a more fun, versatile look, loop it around your favorite bag or through your belt loops for a pop of Buckeye pride. Our scarf is lightweight and fun to wear, making it the perfect accessory for game days and beyond!</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g Ohio State apparel designed specifically for women?",
+            "answer": "<p>Yes. g/g is a women-owned design house creating women’s college apparel designed by women, for women. Our collections prioritize silhouettes made specifically for women, thoughtful construction, comfort, and fashion-forward details so your team pride can still look and feel like you.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g Ohio State Buckeyes apparel officially licensed?",
+            "answer": "<p>Yes. g/g offers officially licensed Ohio State Buckeyes apparel, bringing authentic Ohio State branding together with elevated women’s collegiate style.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I style Ohio State women’s apparel for game day and beyond?",
+            "answer": "<p>Build your game day look with a statement sweater, fleece, or puffer paired with denim and your favorite scarlet-and-gray accessories. For everyday wear, work those same pieces into your regular rotation with subtler layers and casual basics. From a tailgate at The Shoe to wherever you’re headed after kickoff, G/G makes it easy to carry your Buckeye pride beyond game day.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "title": "FAQs",
+        "heading_tag": "h3"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "team_products",
+    "story_1",
+    "story_2",
+    "faq"
+  ]
+}

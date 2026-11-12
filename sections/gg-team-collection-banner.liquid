@@ -1,0 +1,226 @@
+<section class="gg-hero gg-collection-hero">
+  {%- if section.settings.ghost_text != blank -%}
+    <div class="gg-hero__ghost" aria-hidden="true">{{ section.settings.ghost_text }}</div>
+  {%- endif -%}
+
+  <div class="gg-hero__img">
+    <picture>
+      {%- liquid
+        assign gg_hero_img = section.settings.image_desktop
+        if section.settings.use_collection_image and collection.image != blank
+          assign gg_hero_img = collection.image
+        endif
+        if gg_hero_img == blank
+          assign gg_hero_img = section.settings.image_mobile
+        endif
+
+        assign gg_hero_img_mobile = section.settings.image_mobile | default: gg_hero_img
+      -%}
+      {%- if gg_hero_img != blank -%}
+        {%- if gg_hero_img_mobile != blank -%}
+          <source media="(max-width:768px)" srcset="{{ gg_hero_img_mobile | image_url: width: 1200 }}">
+        {%- endif -%}
+        <img
+          src="{{ gg_hero_img | image_url: width: 2000 }}"
+          srcset="{{ gg_hero_img | image_url: width: 2000 }} 1x, {{ gg_hero_img | image_url: width: 3840 }} 2x"
+          alt="{{ gg_hero_img.alt | escape | default: collection.title | escape | default: "Women's g/g college apparel" }}"
+          width="{{ gg_hero_img.width | default: 2000 }}"
+          height="{{ gg_hero_img.height | default: 1064 }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'gg-hero-bg.png' | asset_url }}"
+          alt="{{ collection.title | escape | default: "Women's g/g college apparel" }}"
+          width="3840"
+          height="2042"
+          loading="eager"
+        >
+      {%- endif -%}
+    </picture>
+  </div>
+
+  <div class="gg-collection-hero__content">
+    <div class="gg-container">
+      <div class="gg-collection-hero__row">
+        <div class="gg-collection-hero__left">
+          {%- liquid
+            assign hero_heading_input = section.settings.heading
+            if hero_heading_input == blank
+              assign hero_heading_input = section.settings.heading_desktop
+            endif
+            if hero_heading_input == blank
+              assign hero_heading_input = section.settings.title
+            endif
+
+            assign hero_title_d = hero_heading_input | default: collection.title
+            assign hero_title_m = section.settings.heading_mobile | default: hero_title_d
+          -%}
+
+          {%- if section.settings.intro_eyebrow != blank -%}
+            <span class="gg-eyebrow">{{ section.settings.intro_eyebrow }}</span>
+          {%- endif -%}
+
+          <h1 class="gg-h--serif gg-collection-hero__title gg-hero__title">
+            {%- if section.settings.heading_mobile != blank and section.settings.heading_mobile != hero_title_d -%}
+              <span class="d">{{ hero_title_d }}</span>
+              <span class="m">{{ section.settings.heading_mobile }}</span>
+            {%- else -%}
+              {{ hero_title_d }}
+            {%- endif -%}
+          </h1>
+
+          {%- liquid
+            assign team_desc = section.settings.description
+            if team_desc == blank
+              assign team_desc = section.settings.fallback_description
+            endif
+            if team_desc == blank
+              assign team_desc = collection.description
+            endif
+          -%}
+          {%- if team_desc != blank -%}
+            <div class="gg-collection-hero__desc rte">
+              {{ team_desc }}
+            </div>
+          {%- endif -%}
+
+          {%- liquid
+            assign gg_hero_btn_label_d = section.settings.btn_desktop | strip
+            assign gg_hero_btn_label_m = section.settings.btn_mobile | strip
+            if gg_hero_btn_label_d != blank or gg_hero_btn_label_m != blank
+              assign gg_hero_btn_show = true
+            endif
+          -%}
+          {%- if gg_hero_btn_show -%}
+            <a class="gg-hero__btn" href="{{ section.settings.btn_link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: section.settings.btn_link %}>
+              {%- if gg_hero_btn_label_d != blank -%}
+                <span class="d">{{ gg_hero_btn_label_d }}</span>
+              {%- endif -%}
+              {%- if gg_hero_btn_label_m != blank -%}
+                <span class="m">{{ gg_hero_btn_label_m }}</span>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Team Banner & Intro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Background"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection_image",
+      "label": "Use collection image as banner background if no desktop image is set",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop background image",
+      "info": "Overrides the collection image when selected."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile background image",
+      "info": "Optional. Shown below 768px."
+    },
+    {
+      "type": "textarea",
+      "id": "ghost_text",
+      "label": "Ghost watermark",
+      "info": "Leave blank if the background image already contains a watermark."
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "intro_eyebrow",
+      "label": "Eyebrow",
+      "default": "SHOP BY TEAM"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Whatever you type here will display as the banner title. Leave blank to show the collection title."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_desktop",
+      "label": "Heading override (desktop)",
+      "info": "Optional desktop override."
+    },
+    {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Heading override (mobile)",
+      "info": "Optional mobile override. Leave blank to use the main heading."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description override",
+      "info": "Optional. Overrides the collection description."
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "<p>Your team is more than a logo. It’s part of your story. Find your colors and wear them like you mean it.</p>",
+      "info": "Shown when both description override and collection description are empty."
+    },
+    {
+      "type": "header",
+      "content": "Team Logo (Right Side)"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_logo",
+      "label": "Fallback team logo",
+      "info": "Shown when collection.metafields.custom.logo is empty."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection_image_as_logo_fallback",
+      "label": "Fallback to collection image if custom.logo metafield is empty",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Optional Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_desktop",
+      "label": "Button label (desktop)"
+    },
+    {
+      "type": "text",
+      "id": "btn_mobile",
+      "label": "Button label (mobile)"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "G/G Team Banner & Intro"
+    }
+  ]
+}
+{% endschema %}

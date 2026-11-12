@@ -86,6 +86,16 @@
           >
             {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+            {%- liquid
+              assign gg_amz_url = blank
+              if settings.amazon_links_enabled != false
+                capture gg_amz_capture
+                  render 'gg-amazon-url', product: product
+                endcapture
+                assign gg_amz_url = gg_amz_capture | strip
+              endif
+            -%}
+
             {%- for block in section.blocks -%}
               {%- case block.type -%}
                 {%- when '@app' -%}
@@ -107,6 +117,11 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
+                  {%- comment -%}
+                    Products that sell through Amazon show no Shopify pricing: the
+                    storefront price is not the price the customer pays.
+                  {%- endcomment -%}
+                  {%- if gg_amz_url == blank -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -141,6 +156,7 @@
                       {{ form | payment_terms }}
                     {%- endform -%}
                   </div>
+                  {%- endif -%}
                 {%- when 'inventory' -%}
                   <p
                     class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -229,6 +245,7 @@
                     </details>
                   </div>
                 {%- when 'quantity_selector' -%}
+                  {%- unless gg_amz_url != blank -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
                     class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -455,6 +472,7 @@
                       </volume-pricing>
                     {%- endif -%}
                   </div>
+                  {%- endunless -%}
                 {%- when 'popup' -%}
                   <modal-opener
                     class="product-popup-modal__opener quick-add-hidden"
@@ -492,13 +510,22 @@
                     product_form_id: product_form_id
                   %}
                 {%- when 'buy_buttons' -%}
-                  {%- render 'buy-buttons',
-                    block: block,
-                    product: product,
-                    product_form_id: product_form_id,
-                    section_id: section.id,
-                    show_pickup_availability: true
-                  -%}
+                  {%- if gg_amz_url != blank -%}
+                    <div class="product__amazon" {{ block.shopify_attributes }}>
+                      {%- render 'gg-amazon-button', amazon_url: gg_amz_url, class: 'product__amazon-link' -%}
+                      {%- if section.settings.amazon_note != blank -%}
+                        <p class="product__amazon-note caption">{{ section.settings.amazon_note | escape }}</p>
+                      {%- endif -%}
+                    </div>
+                  {%- else -%}
+                    {%- render 'buy-buttons',
+                      block: block,
+                      product: product,
+                      product_form_id: product_form_id,
+                      section_id: section.id,
+                      show_pickup_availability: true
+                    -%}
+                  {%- endif -%}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -2296,6 +2323,16 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.settings.amazon_heading.content"
+    },
+    {
+      "type": "text",
+      "id": "amazon_note",
+      "default": "Available styles and purchasing are through Amazon.",
+      "label": "t:sections.main-product.settings.amazon_note.label"
     },
     {
       "type": "header",

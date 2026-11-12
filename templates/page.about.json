@@ -1,0 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gg_hero": {
+      "type": "gg-hero",
+      "settings": {
+        "image_desktop": "shopify://shop_images/Background_1.png",
+        "ghost_text": "Her\nStandard",
+        "heading_desktop": "About <span style=\"text-transform:lowercase;\">g/g</span>",
+        "heading_mobile": "About g/g",
+        "subheading": "",
+        "subtext": "",
+        "btn_desktop": "",
+        "btn_mobile": "",
+        "btn_link": ""
+      }
+    },
+    "main": {
+      "type": "gg-about",
+      "settings": {
+        "title": "From Game Day to Every Day",
+        "quote": "<p>g/g is a women-owned design house creating collegiate apparel for women who want to show their school pride without leaving their personal style behind.&nbsp;<br/><br/>Designed by women, for women, our pieces go beyond the basic tees and traditional fanwear. We believe being a fan shouldn't mean settling for boxy fits, basic tees, or apparel designed with someone else in mind. That's why we create elevated, fashion-forward styles made with women, current trends, and real life in mind.<br/><br/>Your love for your alma mater doesn't end on campus. g/g is made to be worn anywhere, from game days to in the office, out with friends, and wherever else life takes you next.<br/><br/>Wherever you're headed, wear it like you mean it.</p>",
+        "btn_label": "Shop g/g on Amazon",
+        "btn_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
+      }
+    }
+  },
+  "order": [
+    "gg_hero",
+    "main"
+  ]
+}

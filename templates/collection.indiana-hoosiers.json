@@ -1,0 +1,147 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "gg-team-collection-banner",
+      "settings": {
+        "use_collection_image": true,
+        "image_desktop": "shopify://shop_images/Indiana_University_Women_s_Apparel.jpg",
+        "image_mobile": "shopify://shop_images/Indiana_University_Women_s_Apparel_Mobile.jpg",
+        "ghost_text": "",
+        "intro_eyebrow": "Ready to Rep the Hoosiers?",
+        "heading": "Indiana University Women’s Apparel",
+        "heading_desktop": "",
+        "heading_mobile": "",
+        "description": "",
+        "fallback_description": "",
+        "fallback_logo": "shopify://shop_images/Frame_29.png",
+        "use_collection_image_as_logo_fallback": false,
+        "btn_desktop": "",
+        "btn_mobile": "",
+        "btn_link": ""
+      }
+    },
+    "team_products": {
+      "type": "gg-team-products",
+      "settings": {
+        "eyebrow": "",
+        "show_breadcrumb": true,
+        "breadcrumb_label": "Indiana University Women’s Apparel",
+        "title": "",
+        "subtext": "",
+        "team_logo": "shopify://shop_images/Indiana_Hoosiers.png",
+        "products_collection": "indiana-hoosiers",
+        "products_to_show": 8,
+        "show_all_products": true,
+        "show_price": true,
+        "no_products": "Products coming soon.",
+        "load_btn": "View More",
+        "load_link": "",
+        "load_done_btn": "Shop More Products On Amazon",
+        "load_amz": "https://www.amazon.com/dp/B0HGNJ24V5/ref=twister_B0HGNNQZYX?_encoding=UTF8&psc=1"
+      }
+    },
+    "story_1": {
+      "type": "gg-team-story",
+      "settings": {
+        "bg_color": "white",
+        "content_alignment": "center",
+        "eyebrow": "Indiana Hoosiers",
+        "title": "Ready to Rep the Hoosiers?",
+        "lead": "",
+        "text": "<p>Bring cream and crimson beyond Bloomington with Indiana University women’s apparel made for wherever you’re headed next.</p>",
+        "btn_label": "Shop the Indiana Hoosiers collection on Amazon",
+        "btn_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
+      }
+    },
+    "story_2": {
+      "type": "gg-team-story",
+      "settings": {
+        "bg_color": "alt",
+        "image": "shopify://shop_images/hoosiers_jacket_v2_06_cap_lifestyle.jpg",
+        "content_alignment": "left",
+        "eyebrow": "",
+        "title": "Cream & Crimson, g/g Style",
+        "lead": "",
+        "text": "<p>From Assembly Hall to Memorial Stadium and everywhere after, your Hoosiers wardrobe should feel like your wardrobe.<br/>g/g puts a boutique-inspired spin on Indiana University women’s apparel with sweaters, fleece, puffer styles, sherpa outerwear, and accessories made specifically for women. As a women-owned design house, we create elevated collegiate styles with modern silhouettes and fashion-forward details that let you show your school pride without compromising your personal style.<br/>Game day to every day, wear your cream and crimson like you mean it.<br/></p>",
+        "btn_label": "Shop Indiana University on Amazon",
+        "btn_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
+      }
+    },
+    "faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I shop g/g Indiana University women’s apparel?",
+            "answer": "<p>Shop the g/g Indiana Hoosiers collection above to explore available styles, then follow the product links to purchase your favorites through g/g on Amazon.<br/></p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What types of Indiana Hoosiers women’s apparel does g/g offer?",
+            "answer": "<p>The collection includes sweaters, a quilted fleece top, 1/4 zip fleece, sherpa jackets and pullovers, a puffer vest, puffer jacket, H2O jacket, knit pom hat, and cotton festival scarf. That gives Hoosiers plenty of layering styles for building a look around their cream and crimson.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I style the g/g scarf?",
+            "answer": "<p>Our scarf is the ultimate wear-it-your-way accessory! Style it around your neck for a classic game day look, rock it as a headscarf or around your ponytail for a cute hairstyle, or knot it onto your favorite handbag for a pop of Hoosier pride. Feeling extra creative? Swap your everyday belt with our scarf to add a playful twist to your outfit. From the stands to the streets, there’s no wrong way to show off your cream and crimson!</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g Indiana University apparel designed specifically for women?",
+            "answer": "<p>Yes. g/g is a women-owned design house creating collegiate apparel designed by women, for women. Instead of treating women’s fan fashion as an afterthought, g/g focuses on elevated styles, modern silhouettes, and fashion-forward details made with women and their personal style in mind.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g Indiana Hoosiers apparel officially licensed?",
+            "answer": "<p>Yes. g/g creates officially licensed Indiana Hoosiers apparel, so you can show your school pride with authentic Indiana colors and team graphics while keeping your look distinctly your own.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I style Indiana University women’s apparel beyond game day?",
+            "answer": "<p>Think beyond a Saturday at Memorial Stadium or a night at Assembly Hall. Pair an Indiana sweater or fleece with denim for everyday wear, layer a puffer vest or sherpa over your favorite basics, or add a cream-and-crimson hat or scarf when you want a smaller nod to your alma mater. g/g is designed around game day to every day, so your IU merch can stay in rotation wherever you go.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "title": "FAQs",
+        "heading_tag": "h3"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "team_products",
+    "story_1",
+    "story_2",
+    "faq"
+  ]
+}

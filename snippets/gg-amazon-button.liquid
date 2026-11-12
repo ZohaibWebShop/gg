@@ -1,0 +1,45 @@
+{% comment %}
+  Renders a "Buy on Amazon" link.
+
+  Renders nothing when `amazon_url` is blank, so callers can output it unconditionally.
+
+  Accepts:
+  - amazon_url: {String} Destination URL, usually resolved by 'gg-amazon-url' (required)
+  - label: {String} Button label. Default: localized "Buy on Amazon" (optional)
+  - class: {String} Extra class names for the anchor (optional)
+  - show_icon: {Boolean} Show the Amazon mark. Default: true (optional)
+  - new_tab: {Boolean} Open in a new tab. Default: true (optional)
+
+  Usage:
+  {%- capture amazon_url -%}
+    {%- render 'gg-amazon-url', product: card_product -%}
+  {%- endcapture -%}
+  {%- render 'gg-amazon-button', amazon_url: amazon_url -%}
+{% endcomment %}
+
+{%- liquid
+  assign gg_amz_url = amazon_url | strip
+  if label != blank
+    assign gg_amz_label = label
+  else
+    assign gg_amz_label = 'products.product.buy_on_amazon' | t
+  endif
+-%}
+
+{%- if gg_amz_url != blank -%}
+  <a
+    class="gg-amz-btn {{ class }}"
+    href="{{ gg_amz_url | escape }}"
+    {% if new_tab != false %}
+      target="_blank"
+      rel="noopener noreferrer"
+    {% endif %}
+  >
+    {%- if show_icon != false -%}
+      <span class="gg-amz-btn__mark" aria-hidden="true">
+        {{- 'icon-amazon.svg' | inline_asset_content -}}
+      </span>
+    {%- endif -%}
+    <span class="gg-amz-btn__label">{{ gg_amz_label | escape }}</span>
+  </a>
+{%- endif -%}

@@ -16,94 +16,419 @@
     "gg_hero": {
       "type": "gg-hero",
       "settings": {
-        "image_desktop": "shopify://shop_images/Background.png",
-        "image_mobile": "shopify://shop_images/Pasted_image.png",
-        "ghost_text": "Her\nStandard",
-        "heading_desktop": "Wear your<br>colors, own<br>your moment",
-        "heading_mobile": "Elevated women’s college apparel for everyday style",
-        "subtext": "Discover college apparel designed for women who take their school spirit beyond the stands and into their everyday lives.",
+        "image_desktop": "shopify://shop_images/Gemini_Generated_Image_mua23zmua23zmua2.jpg",
+        "image_mobile": "shopify://shop_images/new-hero-banner.jpg",
+        "ghost_text": "",
+        "heading_desktop": "WEAR YOUR COLORS, OWN YOUR MOMENT",
+        "heading_mobile": "Wear Your Colors, Own Your Moment",
+        "subheading": "",
+        "subtext": "You take your school spirit seriously, so do we. Discover collegiate fashion designed by women for women.",
         "btn_desktop": "Shop the g/g collection on Amazon",
         "btn_mobile": "Shop the g/g Collection",
-        "btn_link": ""
+        "btn_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
       }
     },
     "gg_shop_by_team": {
       "type": "gg-shop-by-team",
       "blocks": {
+        "team_UdBANc": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_PbBaF7": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Arizona_Wildcats.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_YwF8t7": {
+          "type": "team",
+          "settings": {
+            "collection": "ohio-state-buckeyes",
+            "image": "shopify://shop_images/Frame_29.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_WWK3Ak": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_28.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_cFWiFD": {
+          "type": "team",
+          "settings": {
+            "collection": "clemson",
+            "image": "shopify://shop_images/Frame_27.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_PE4r9i": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Colorado_Buffaloes.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_QfnTjD": {
+          "type": "team",
+          "settings": {
+            "collection": "indiana-hoosiers",
+            "image": "shopify://shop_images/Indiana_Hoosiers.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_CL4Qmk": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_hdruj7hdruj7hdru-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_bwzb8C": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_is7jmfis7jmfis7j-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_NjjWRe": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Missouri_Tigers.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_3EmRWt": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_34.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_NRNNBW": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Michigan_Wolverines.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_yKyejL": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_35.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_iaTe94": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Penn_State_Nittany_Lions.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_wpCCkJ": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Tennessee_Volunteers.svg",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_yDzDdB": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_yxftlbyxftlbyxft-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_zYTQMk": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Ole_Miss_Rebels.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_cdN6Xx": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Texas_A_M_Aggies.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_JKPThx": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/TCU_Horned_Frogs.svg",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_PbjeLn": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_ftr0enftr0enftr0-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_nE6kfB": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Georgia_Tech_Yellow_Jackets.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_nthGmB": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Maryland_Terrapins_1f65c343-56b8-485a-8b2f-020227463bd5.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_ikb4hH": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/main_nav_logo.svg",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_JAicbA": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_38.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_M8KnKf": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/87953287-cced-43a3-9535-f2f4f6b5016b-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_UVwPWR": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/5922098e-c88f-4749-831d-91871f727048-removebg-preview_1.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_riPmBr": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_hdruj7hdruj7hdru-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
+        "team_jQH8Y9": {
+          "type": "team",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_qdiwjzqdiwjzqdiw-removebg-preview.png",
+            "image_asset": "gg-team-1.png",
+            "link": ""
+          }
+        },
         "d1": {
           "type": "product",
           "settings": {
+            "product": "gg-womens-ncaa-cable-knit-pom-beanie",
             "image_asset": "gg-p-miranda.png",
             "title": "MIRANDA OVERSIZED FLEECE CREW",
-            "price": "$62.00",
             "link": ""
           }
         },
         "d2": {
           "type": "product",
           "settings": {
+            "product": "gg-womens-ncaa-cable-turtleneck-sweater",
             "image_asset": "gg-p-willow.png",
             "title": "WILLOW FASHION CAMO SHERPA HOODIE",
-            "price": "$78.00",
             "link": ""
           }
         },
         "d3": {
           "type": "product",
           "settings": {
+            "product": "gg-womens-ncaa-crewneck-intarsia-name-repeat-sweater",
             "image_asset": "gg-p-wallace.png",
             "title": "WALLACE CLASSIC CAMO FIELD JACKET",
-            "price": "$113.00",
             "link": ""
           }
         },
         "d4": {
           "type": "product",
           "settings": {
+            "product": "gg-womens-ncaa-crewneck-varsity-stripe-sweater",
             "image_asset": "gg-p-winona.png",
             "title": "WINONA CLASSIC CAMO SPORT DRESS",
-            "price": "$80.00",
             "link": ""
           }
         },
         "d5": {
           "type": "product",
           "settings": {
+            "product": "gg-womens-ncaa-fashion-scarf",
             "image_asset": "gg-p-shea.png",
             "title": "SHEA TEAM JACQUARD CARDIGAN",
-            "price": "$136.00",
             "link": ""
           }
         },
         "d6": {
           "type": "product",
           "settings": {
+            "product": "gg-womens-ncaa-puffer-jacket",
             "image_asset": "gg-p-sylvie.png",
             "title": "SYLVIE NAME SLEEVE SWEATER",
-            "price": "$158.00",
             "link": ""
           }
         },
         "d7": {
           "type": "product",
           "settings": {
+            "product": "womens-ncaa-puffer-vest",
             "image_asset": "gg-p-georgie.png",
             "title": "GEORGIE CRYSTAL DENIM JACKET",
-            "price": "$234.00",
             "link": ""
           }
         },
         "d8": {
           "type": "product",
           "settings": {
+            "product": "womens-ncaa-quarter-zip-fleece-sweatshirt",
             "image_asset": "gg-p-gaby.png",
             "title": "GABY CONTRAST SHERPA JACKET",
-            "price": "$134.00",
+            "link": ""
+          }
+        },
+        "product_NC8jBm": {
+          "type": "product",
+          "settings": {
+            "product": "womens-ncaa-sherpa-v-neck-pullover",
+            "image_asset": "gg-p-miranda.png",
+            "title": "PRODUCT NAME",
+            "link": ""
+          }
+        },
+        "product_WitAdV": {
+          "type": "product",
+          "settings": {
+            "product": "womens-ncaa-sherpa-varsity-jacket",
+            "image_asset": "gg-p-miranda.png",
+            "title": "PRODUCT NAME",
+            "link": ""
+          }
+        },
+        "product_gpbg4f": {
+          "type": "product",
+          "settings": {
+            "product": "womens-ncaa-water-resistant-bomber-jacket",
+            "image_asset": "gg-p-miranda.png",
+            "title": "PRODUCT NAME",
+            "link": ""
+          }
+        },
+        "product_b6Uq88": {
+          "type": "product",
+          "settings": {
+            "product": "ncaa-leather-keychain",
+            "image_asset": "gg-p-miranda.png",
+            "title": "PRODUCT NAME",
+            "link": ""
+          }
+        },
+        "product_MkYjtV": {
+          "type": "product",
+          "settings": {
+            "product": "womens-ncaa-leather-wristlet",
+            "image_asset": "gg-p-miranda.png",
+            "title": "PRODUCT NAME",
             "link": ""
           }
         }
       },
       "block_order": [
+        "team_UdBANc",
+        "team_PbBaF7",
+        "team_YwF8t7",
+        "team_WWK3Ak",
+        "team_cFWiFD",
+        "team_PE4r9i",
+        "team_QfnTjD",
+        "team_CL4Qmk",
+        "team_bwzb8C",
+        "team_NjjWRe",
+        "team_3EmRWt",
+        "team_NRNNBW",
+        "team_yKyejL",
+        "team_iaTe94",
+        "team_wpCCkJ",
+        "team_yDzDdB",
+        "team_zYTQMk",
+        "team_cdN6Xx",
+        "team_JKPThx",
+        "team_PbjeLn",
+        "team_nE6kfB",
+        "team_nthGmB",
+        "team_ikb4hH",
+        "team_JAicbA",
+        "team_M8KnKf",
+        "team_UVwPWR",
+        "team_riPmBr",
+        "team_jQH8Y9",
         "d1",
         "d2",
         "d3",
@@ -111,62 +436,29 @@
         "d5",
         "d6",
         "d7",
-        "d8"
+        "d8",
+        "product_NC8jBm",
+        "product_WitAdV",
+        "product_gpbg4f",
+        "product_b6Uq88",
+        "product_MkYjtV"
       ],
       "settings": {
-        "eyebrow": "Shop by Team",
+        "eyebrow": "SHOP BY TEAM",
         "title": "Who Are You Repping?",
-        "subtext": "Your team is more than a logo. It’s part of your story.",
+        "subtext": "Your team is more than a logo. It’s part of your story. Find your colors and wear them like you mean it.",
         "team_btn": "Select Your Team",
+        "collections": [],
+        "products_collection": "",
+        "products_to_show": 4,
+        "no_products": "No products found for this team.",
         "team_link": "",
-        "teams_count": "Total Teams: 19",
+        "teams_total_label": "Total Teams:",
         "show_all": "Show all teams",
         "load_btn": "Load More ...",
-        "load_link": ""
-      }
-    },
-    "gg_featured_collection": {
-      "type": "gg-featured-collection",
-      "blocks": {
-        "f1": {
-          "type": "product",
-          "settings": {
-            "image_asset": "gg-f-sylvie.png",
-            "title": "SYLVIE NAME SLEEVE SWEATER",
-            "price": "$158.00",
-            "link": ""
-          }
-        },
-        "f2": {
-          "type": "product",
-          "settings": {
-            "image_asset": "gg-f-georgie.png",
-            "title": "GEORGIE CRYSTAL DENIM JACKET",
-            "price": "$234.00",
-            "link": ""
-          }
-        },
-        "f3": {
-          "type": "product",
-          "settings": {
-            "image_asset": "gg-f-gaby.png",
-            "title": "GABY CONTRAST SHERPA JACKET",
-            "price": "$134.00",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "f1",
-        "f2",
-        "f3"
-      ],
-      "settings": {
-        "eyebrow": "Featured Collection",
-        "title": "Women’s College Apparel, g/g Style",
-        "subtext": "From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do.",
-        "cta_label": "Shop the Collection",
-        "cta_link": ""
+        "load_link": "",
+        "load_done_btn": "Shop the collection on Amazon",
+        "load_amz": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925"
       }
     },
     "gg_category": {
@@ -175,41 +467,45 @@
         "c1": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/card_2_1_cfe5ae2c-eaab-4af6-883f-1cde59dc103c.png",
             "image_asset": "gg-cat-sweater.png",
             "title": "The Sweater",
             "subtext": "Oversized, cozy, and anything but basic.",
             "cta": "SHOP SWEATERS",
-            "link": ""
+            "link": "https://www.amazon.com/dp/B0HGD1BPD4"
           }
         },
         "c2": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/card_2.png",
             "image_asset": "gg-cat-hoodie.png",
-            "title": "The Hoodie",
-            "subtext": "Your go-to layer for every chilly kickoff.",
-            "cta": "SHOP HOODIES",
-            "link": ""
+            "title": "The Layer",
+            "subtext": "Your new favorite layer for chilly kickoffs.",
+            "cta": "SHOP SHERPA",
+            "link": "https://www.amazon.com/dp/B0HGJNHK9J?th=1&psc=1"
           }
         },
         "c3": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/M.png",
             "image_asset": "gg-cat-tee.png",
-            "title": "The Baby Tee",
-            "subtext": "Small tee, big school spirit.",
-            "cta": "SHOP TEES",
-            "link": ""
+            "title": "The Jacket",
+            "subtext": "Standout style for the sidelines.",
+            "cta": "SHOP JACKETS",
+            "link": "https://www.amazon.com/dp/B0HGJ21HR9?th=1&psc=1"
           }
         },
         "c4": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/UK.png",
             "image_asset": "gg-cat-jacket.png",
-            "title": "The Statement Jacket",
-            "subtext": "School colors made to stand out anywhere.",
-            "cta": "SHOP Jackets",
-            "link": ""
+            "title": "The Vest",
+            "subtext": "A little sporty. A lot of style.",
+            "cta": "SHOP VESTS",
+            "link": "https://www.amazon.com/dp/B0HGNSZY1S?th=1&psc=1"
           }
         }
       },
@@ -222,17 +518,7 @@
       "settings": {
         "title": "Your Starting Lineup",
         "all_label": "Explore All Products",
-        "all_link": ""
-      }
-    },
-    "gg_lifestyle": {
-      "type": "gg-lifestyle",
-      "settings": {
-        "title": "School Spirit That Goes Where You Go",
-        "subtext": "g/g makes collegiate style for beyond game day, with pieces designed to feel just as right in the stands as they do everywhere else.",
-        "banner_heading": "HELLO GORGEOUS",
-        "cta_label": "GET THE LOOK",
-        "cta_link": ""
+        "all_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925"
       }
     },
     "gg_new_arrivals": {
@@ -241,6 +527,7 @@
         "n1": {
           "type": "product",
           "settings": {
+            "product": "clemson-cable-turtleneck-sweater-1",
             "image_asset": "gg-p-miranda.png",
             "title": "MIRANDA OVERSIZED FLEECE CREW",
             "price": "$62.00",
@@ -250,6 +537,7 @@
         "n2": {
           "type": "product",
           "settings": {
+            "product": "iowa-cable-turtleneck-sweater",
             "image_asset": "gg-p-willow.png",
             "title": "WILLOW FASHION CAMO SHERPA HOODIE",
             "price": "$78.00",
@@ -259,6 +547,7 @@
         "n3": {
           "type": "product",
           "settings": {
+            "product": "clemson-fleece-1-4-zip",
             "image_asset": "gg-p-wallace.png",
             "title": "WALLACE CLASSIC CAMO FIELD JACKET",
             "price": "$113.00",
@@ -268,6 +557,7 @@
         "n4": {
           "type": "product",
           "settings": {
+            "product": "michigan-state-sherpa-jacket",
             "image_asset": "gg-p-winona.png",
             "title": "WINONA CLASSIC CAMO SPORT DRESS",
             "price": "$80.00",
@@ -277,6 +567,7 @@
         "n5": {
           "type": "product",
           "settings": {
+            "product": "ohio-state-cable-turtleneck-sweater",
             "image_asset": "gg-p-shea.png",
             "title": "SHEA TEAM JACQUARD CARDIGAN",
             "price": "$136.00",
@@ -286,6 +577,7 @@
         "n6": {
           "type": "product",
           "settings": {
+            "product": "ohio-state-water-resistant-bomber-jacket",
             "image_asset": "gg-p-gaby.png",
             "title": "GABY CONTRAST SHERPA JACKET",
             "price": "$134.00",
@@ -305,96 +597,277 @@
         "eyebrow": "New Arrivals",
         "title": "JUST LANDED",
         "subtext": "New styles. Same school pride.",
-        "all_label": "View All",
-        "all_link": ""
+        "all_label": "View all",
+        "all_link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ"
+      }
+    },
+    "gg_featured_collection": {
+      "type": "gg-featured-collection",
+      "blocks": {
+        "f1": {
+          "type": "product",
+          "settings": {
+            "product": "g-g-ohio-state-buckeyes-puffer-vest",
+            "image_asset": "gg-f-sylvie.png",
+            "title": "SYLVIE NAME SLEEVE SWEATER",
+            "price": "$158.00",
+            "link": ""
+          }
+        },
+        "f2": {
+          "type": "product",
+          "settings": {
+            "product": "ohio-state-water-resistant-bomber-jacket",
+            "image_asset": "gg-f-georgie.png",
+            "title": "GEORGIE CRYSTAL DENIM JACKET",
+            "price": "$234.00",
+            "link": ""
+          }
+        },
+        "f3": {
+          "type": "product",
+          "settings": {
+            "product": "clemson-cable-turtleneck-sweater",
+            "image_asset": "gg-f-gaby.png",
+            "title": "GABY CONTRAST SHERPA JACKET",
+            "price": "$134.00",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/Featured_Collections_2.png",
+        "big_image": "shopify://shop_images/Ohio_State_-_IMG-2_1.png",
+        "image_link": "https://www.amazon.com/dp/B0HGNJ24V5/ref=twister_B0HGNNQZYX?_encoding=UTF8&psc=1",
+        "eyebrow": "Featured Collection",
+        "title": "Women’s College Apparel, g/g Style",
+        "subtext": "From statement sweaters and standout jackets to baby tees and versatile layering options, discover college apparel designed to go wherever you do.",
+        "cta_label": "Shop the collection on Amazon",
+        "cta_link": "https://www.amazon.com/stores…HDS9AFRMQZPP0TVFMEGQ"
+      }
+    },
+    "gg_lifestyle": {
+      "type": "gg-lifestyle",
+      "blocks": {
+        "slide_qUaahN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/image_26.png",
+            "heading": "HELLO GORGEOUS",
+            "cta_label": "Get the look",
+            "cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_qUaahN"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Oct_6_2026_06_22_53_AM.png",
+        "title": "SCHOOL SPIRIT THAT GOES WHERE YOU GO",
+        "subtext": "g/g makes collegiate style for beyond game day, with pieces designed to feel just as right in the stands as they do everywhere else.",
+        "banner_heading": "",
+        "cta_label": "Get the look",
+        "cta_link": "https://www.amazon.com/dp/B0HFQ8GH1X",
+        "autoplay": true,
+        "speed": 5
       }
     },
     "gg_fashion_statement": {
       "type": "gg-fashion-statement",
       "settings": {
-        "eyebrow": "Fashion Statement",
-        "title": "From Game Day<br>to Every Day",
-        "link_label": "EXPLORE g/g",
-        "link": "",
-        "quote": "“g/g takes women’s college apparel to the next level. Think elevated layers, feminine silhouettes, playful details, and statement-making team styles designed for women who want to rep their team confidently in their everyday lives.”"
+        "image": "shopify://shop_images/Autumn_Stroll_in_Collegiate_Style.png",
+        "eyebrow": "FASHION STATEMENT",
+        "title": "FROM GAME DAY TO EVERY DAY",
+        "link_label": "Explore g/g on Amazon",
+        "link": "https://www.amazon.com/stores/g-g/page/A1249A3A-6615-4557-8AF4-970BEFB8A925?ref_=cm_sw_r_ud_sf_stores_HDS9AFRMQZPP0TVFMEGQ",
+        "quote": "g/g takes women’s college apparel to the next level. Think elevated layers, feminine silhouettes, playful details, and statement-making team styles designed for women who want to rep their team confidently in their everyday lives."
       }
     },
     "gg_cta": {
       "type": "gg-cta",
+      "disabled": true,
       "settings": {
-        "title": "Your team is calling,<br>your outfit is waiting",
-        "serif": "Wear it like you mean it.",
+        "image": "shopify://shop_images/Gemini_Generated_Image_fv183ifv183ifv18.jpg",
+        "title": "YOUR TEAM IS  / CALLING, YOUR / OUTFIT IS WAITING",
+        "serif": "Wear it like / you mean it.",
         "subtext": "Discover college fan staples and statement styles designed to keep your school part of your everyday wardrobe.",
-        "pr_label": "SHOP g/g",
-        "pr_link": "",
-        "sc_label": "Shop Your Team",
-        "sc_link": ""
-      }
-    },
-    "gg_amazon": {
-      "type": "gg-amazon",
-      "blocks": {
-        "a1": {
-          "type": "amazon",
-          "settings": {
-            "image_asset": "gg-am-1.png",
-            "badge": "Other",
-            "title": "WINONA CLASSIC CAMO SPORT DRESS",
-            "reviews": "5.0 (1.2k Reviews)",
-            "price": "$80.00",
-            "cart_label": "Add to Cart",
-            "buy_label": "Buy Now",
-            "buy_link": ""
-          }
-        },
-        "a2": {
-          "type": "amazon",
-          "settings": {
-            "image_asset": "gg-am-2.png",
-            "badge": "Other",
-            "title": "WENDY FASHION CAMO H2O HALF-ZIP",
-            "reviews": "5.0 (1.2k Reviews)",
-            "price": "$88.00",
-            "cart_label": "Add to Cart",
-            "buy_label": "Buy Now",
-            "buy_link": ""
-          }
-        },
-        "a3": {
-          "type": "amazon",
-          "settings": {
-            "image_asset": "gg-p-willow.png",
-            "badge": "Other",
-            "title": "WILLOW FASHION CAMO SHERPA HOODIE",
-            "reviews": "5.0 (1.2k Reviews)",
-            "price": "$78.00",
-            "cart_label": "Add to Cart",
-            "buy_label": "Buy Now",
-            "buy_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "settings": {
-        "eyebrow": "Amazon Shopping",
-        "title": "SEE SOMETHING YOU LOVE?",
-        "subtext": "Shop g/g on Amazon and find school styles perfect for any occasion.",
-        "cta_label": "SHOP ON AMAZON",
-        "cta_link": "",
-        "note": "Available styles and purchasing are through Amazon."
+        "pr_label": "",
+        "pr_link": ""
       }
     },
     "gg_social": {
       "type": "gg-social",
+      "blocks": {
+        "bottom_image_rrpXK8": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/uk_jacket_v2_08_front_alt2.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_FAAfRD": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/michigan_jacket_07_cafe_lifestyle.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_biAkTB": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_21_2026_01_33_55_PM_d1e58128-a8dd-4de3-b42f-f785806c6abd.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_LtprME": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/msu_varsity_jacket_02_front_alt.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "bottom_image_83EzWV": {
+          "type": "bottom_image",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_21_2026_02_33_22_PM.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_tUzqGe": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/02-three-quarter-black-cutoffs.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_4DgU8j": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/04-white-main.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_yMjWCG": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/07-lifestyle-tagged.jpg",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_FYQDP7": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/02-scarf-ponytail.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_UFpUNe": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/02-tennis-skirt-hero.png",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "top_image_XdhRpw": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/03-back.png",
+            "link": "",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "bottom_image_rrpXK8",
+        "bottom_image_FAAfRD",
+        "bottom_image_biAkTB",
+        "bottom_image_LtprME",
+        "bottom_image_83EzWV",
+        "top_image_tUzqGe",
+        "top_image_4DgU8j",
+        "top_image_yMjWCG",
+        "top_image_FYQDP7",
+        "top_image_UFpUNe",
+        "top_image_XdhRpw"
+      ],
       "settings": {
-        "eyebrow": "Stay Social",
-        "title": "Show us how you wear g/g.",
+        "eyebrow": "STAY SOCIAL",
+        "title": "SHOW US HOW YOU WEAR g/g.",
         "follow_label": "Follow us",
-        "follow_link": ""
+        "follow_link": "https://www.instagram.com/ggstyleofficial/",
+        "source": "manual",
+        "ig_access_token": "",
+        "ig_post_count": 8,
+        "ig_link": ""
+      }
+    },
+    "gg_faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g college apparel officially licensed?",
+            "answer": "<p>Yes, g/g offers officially licensed women’s college apparel designed for women to represent their schools with authentic team pride and elevated personal style. Shop by team to find available styles and collections for your school.&nbsp;</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What types of women’s college apparel does g/g offer?",
+            "answer": "<p>g/g offers fashion-forward collegiate apparel designed specifically for women, with styles ranging from sweaters, hoodies, and baby tees to statement jackets and other seasonal favorites. Explore new arrivals and shop by team to see the latest styles available for your school.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I wear g/g college apparel beyond game day?",
+            "answer": "<p>Absolutely. g/g is designed around game day to every day. Our elevated layers, modern silhouettes, and versatile styles make it easy to show your school pride at the game, around campus, at the office, or anywhere else you may go.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find apparel for my college or team?",
+            "answer": "<p>Use Shop by Team to find g/g apparel available for your school. Choose your team to explore current styles, new arrivals, and collegiate favorites in your school colors.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is g/g college apparel designed specifically for women?",
+            "answer": "<p>Yes. g/g is a women-owned design house creating collegiate apparel designed by women, for women. At g/g, we create elevated, trend-driven pieces with women’s style and everyday comfort and wearability in mind.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "title": "FAQs",
+        "heading_tag": "h2"
       }
     },
     "gg_footer": {
@@ -406,14 +879,14 @@
     "gg_header",
     "gg_hero",
     "gg_shop_by_team",
-    "gg_featured_collection",
     "gg_category",
-    "gg_lifestyle",
     "gg_new_arrivals",
+    "gg_featured_collection",
+    "gg_lifestyle",
     "gg_fashion_statement",
     "gg_cta",
-    "gg_amazon",
     "gg_social",
+    "gg_faq",
     "gg_footer"
   ]
 }

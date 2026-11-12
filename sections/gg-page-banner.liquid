@@ -1,0 +1,141 @@
+<section
+  class="gg-page-banner gg-page-banner--{{ section.settings.text_alignment }}"
+  style="--gg-banner-h: {{ section.settings.banner_height }}px; --gg-banner-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+>
+  {%- liquid
+    assign gg_banner_image = section.settings.image
+    assign gg_banner_image_mobile = section.settings.image_mobile | default: gg_banner_image
+  -%}
+
+  <div class="gg-page-banner__media">
+    {%- if gg_banner_image != blank -%}
+      <picture>
+        {%- if gg_banner_image_mobile != blank -%}
+          <source media="(max-width: 768px)" srcset="{{ gg_banner_image_mobile | image_url: width: 1200 }}">
+        {%- endif -%}
+        <img
+          src="{{ gg_banner_image | image_url: width: 2400 }}"
+          srcset="{{ gg_banner_image | image_url: width: 2400 }} 1x, {{ gg_banner_image | image_url: width: 3840 }} 2x"
+          alt="{{ gg_banner_image.alt | escape | default: section.settings.heading | escape }}"
+          width="{{ gg_banner_image.width }}"
+          height="{{ gg_banner_image.height }}"
+          loading="eager"
+        >
+      </picture>
+    {%- else -%}
+      <img
+        src="{{ 'gg-hero-bg.png' | asset_url }}"
+        alt="{{ section.settings.heading | escape }}"
+        width="3840"
+        height="2042"
+        loading="eager"
+      >
+    {%- endif -%}
+  </div>
+
+  <div class="gg-page-banner__overlay" aria-hidden="true"></div>
+
+  <div class="gg-container gg-page-banner__content">
+    {%- if section.settings.pretitle != blank -%}
+      <p class="gg-page-banner__pretitle">{{ section.settings.pretitle }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="gg-page-banner__heading">
+        {%- render 'gg-breaks', text: section.settings.heading, class: 'gg-page-banner__heading-line' -%}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <div class="gg-page-banner__desc rte">{{ section.settings.description }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Page Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Falls back to the default g/g hero image when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile background image",
+      "info": "Optional. Shown below 768px."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Dark overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "label": "Banner height (desktop)",
+      "min": 320,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 520
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "pretitle",
+      "label": "Pre-text",
+      "default": "SESSION CATALOGS"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Session Catalogs",
+      "info": "Use a line break to split the heading into lines."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Browse our latest session catalogs and discover the collections designed for every moment.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "G/G Page Banner"
+    }
+  ]
+}
+{% endschema %}

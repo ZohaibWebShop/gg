@@ -2,11 +2,9 @@
   Reusable G/G header logo. Uses the schema logo image when set,
   otherwise falls back to the brand name + orange mark.
 {%- endcomment -%}
-<a class="gg-header__logo" href="{{ routes.root_url }}">
+<a class="gg-header__logo" href="{{ routes.root_url }}" style="--gg-logo-width: {{ settings.logo_width | default: 100 }}px;">
   {%- if settings.logo != blank -%}
     {%- assign gg_logo_alt = settings.logo.alt | default: shop.name | escape -%}
-    {%- assign gg_logo_width = settings.logo_width | default: 100 -%}
-    {%- assign gg_logo_height = gg_logo_width | divided_by: settings.logo.aspect_ratio -%}
     {%- if preload == false -%}
       {{
         settings.logo
@@ -14,8 +12,6 @@
         | image_tag:
           class: 'gg-header__logo-img',
           widths: '50, 100, 120, 160, 200, 240, 300, 400, 500, 600',
-          height: gg_logo_height,
-          width: gg_logo_width,
           alt: gg_logo_alt
       }}
     {%- else -%}
@@ -25,8 +21,6 @@
         | image_tag:
           class: 'gg-header__logo-img',
           widths: '50, 100, 120, 160, 200, 240, 300, 400, 500, 600',
-          height: gg_logo_height,
-          width: gg_logo_width,
           alt: gg_logo_alt,
           preload: true
       }}

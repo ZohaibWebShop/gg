@@ -1495,14 +1495,39 @@
         "default": "footer"
       },
       {
+        "type": "text",
+        "id": "gg_menu_catalog_title",
+        "label": "Footer menu 1 title",
+        "default": "Catalog"
+      },
+      {
         "type": "link_list",
         "id": "gg_menu_customers",
         "label": "Footer menu 2 (Customers)"
       },
       {
+        "type": "text",
+        "id": "gg_menu_customers_title",
+        "label": "Footer menu 2 title",
+        "default": "Customers"
+      },
+      {
         "type": "link_list",
         "id": "gg_menu_brand",
         "label": "Footer menu 3 (Brand)"
+      },
+      {
+        "type": "text",
+        "id": "gg_menu_brand_title",
+        "label": "Footer menu 3 title",
+        "default": "Brand"
+      },
+      {
+        "type": "checkbox",
+        "id": "gg_newsletter_enable",
+        "default": false,
+        "label": "Show newsletter signup in footer",
+        "info": "When disabled the signup heading and form are not rendered in the footer."
       },
       {
         "type": "richtext",
@@ -1515,6 +1540,32 @@
         "id": "gg_news_btn",
         "label": "Newsletter button text",
         "default": "Sign up"
+      }
+    ]
+  },
+  {
+    "name": "G/G Amazon",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Reads the \"amazon_link\" metafield on products. Collections inherit the link from the first product that has one."
+      },
+      {
+        "type": "checkbox",
+        "id": "amazon_links_enabled",
+        "default": true,
+        "label": "Enable Amazon links"
+      },
+      {
+        "type": "checkbox",
+        "id": "amazon_hide_add_to_cart",
+        "default": false,
+        "label": "Hide \"Add to cart\" on products that have an Amazon link",
+        "info": "The product page always shows the Amazon button instead of \"Add to cart\" when an Amazon link exists."
+      },
+      {
+        "type": "paragraph",
+        "content": "Add the metafield in Settings > Custom data > Products: namespace \"custom\", key \"amazon_link\", type \"URL\"."
       }
     ]
   }

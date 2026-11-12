@@ -1,0 +1,54 @@
+{% comment %}
+  Resolves the Amazon destination URL for a product, collection or the current resource.
+
+  Reads `product.metafields.custom.amazon_link`. When a collection is passed and the
+  collection itself has no metafield, it falls back to the first product inside the
+  collection that has one.
+
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - collection: {Object} Collection Liquid object (optional)
+  - fallback: {String} URL used when no Amazon link exists (optional)
+  - max_scan: {Number} How many products of a collection to check before giving up. Default: 24 (optional)
+
+  Usage:
+  {%- capture amazon_url -%}
+    {%- render 'gg-amazon-url', product: card_product -%}
+  {%- endcapture -%}
+  {%- assign amazon_url = amazon_url | strip -%}
+{% endcomment %}
+
+{%- liquid
+  assign gg_amazon_raw = blank
+  assign gg_amazon_object = product | default: collection
+  assign gg_amazon_scan = max_scan | default: 24
+
+  if gg_amazon_object != blank
+    assign gg_amazon_raw = gg_amazon_object.metafields.custom.amazon_link.value
+  endif
+
+  if gg_amazon_raw == blank and collection != blank
+    for gg_amazon_item in collection.products limit: gg_amazon_scan
+      assign gg_amazon_raw = gg_amazon_item.metafields.custom.amazon_link.value
+      if gg_amazon_raw != blank
+        break
+      endif
+    endfor
+  endif
+
+  assign gg_amazon_url = gg_amazon_raw | strip
+  assign gg_amazon_lower = gg_amazon_url | downcase
+  assign gg_amazon_valid = false
+
+  if gg_amazon_url != blank and gg_amazon_url != 'javascript' and gg_amazon_url != 'data'
+    if gg_amazon_lower contains '://'
+      assign gg_amazon_valid = true
+    endif
+  endif
+
+  if gg_amazon_valid
+    echo gg_amazon_url
+  else
+    echo fallback
+  endif
+-%}

@@ -1,0 +1,217 @@
+<section class="gg-section gg-shopteam gg-team-products">
+  <div class="gg-container">
+    {%- if section.settings.eyebrow != blank or section.settings.title != blank or section.settings.subtext != blank -%}
+      <div class="gg-head-row">
+        <div class="gg-head-row__col gg-head-row__col--1">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="gg-eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="gg-h--serif" style="font-size:clamp(34px,3.6vw,56px);">{{ section.settings.title }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.subtext != blank -%}
+          <div class="gg-head-row__col gg-head-row__col--2">
+            <p class="gg-sub">{{ section.settings.subtext }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign grid_collection = section.settings.products_collection | default: collection
+      assign grid_cap = 250
+      assign grid_limit = section.settings.products_to_show | default: 8 | plus: 0
+      if section.settings.show_all_products
+        assign grid_limit = grid_cap
+      endif
+      assign gg_more_count = 0
+      assign gg_first_block_product = blank
+    -%}
+
+    {%- if section.settings.show_breadcrumb -%}
+      {%- assign gg_bc_label = section.settings.breadcrumb_label | default: collection.title | strip_html -%}
+      <nav class="gg-breadcrumbs" aria-label="breadcrumbs">
+        <ol class="gg-breadcrumbs__list">
+          <li class="gg-breadcrumbs__item"><a href="{{ routes.root_url }}">Home</a></li>
+          <li class="gg-breadcrumbs__sep" aria-hidden="true">&gt;</li>
+          <li class="gg-breadcrumbs__item" aria-current="page">{{ gg_bc_label }}</li>
+        </ol>
+      </nav>
+    {%- endif -%}
+
+    <div class="gg-grid gg-grid--4 gg-shopteam__grid" data-gg-load-grid>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          {%- if gg_first_block_product == blank and product != blank -%}
+            {%- assign gg_first_block_product = product -%}
+          {%- endif -%}
+          {%- assign gg_card_amz = block.settings.amazon_url | default: block.settings.link -%}
+          {%- if gg_card_amz == blank and product != blank and settings.amazon_links_enabled != false -%}
+            {%- capture gg_card_amz -%}{%- render 'gg-amazon-url', product: product -%}{%- endcapture -%}
+            {%- assign gg_card_amz = gg_card_amz | strip -%}
+          {%- endif -%}
+          {%- if forloop.index > grid_limit -%}
+            {%- assign gg_more_count = gg_more_count | plus: 1 -%}
+          {%- endif -%}
+          <a class="gg-card gg-card--tall" href="{{ gg_card_amz | default: product.url | default: routes.collections_url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %}{% if forloop.index > grid_limit %} data-gg-more hidden{% endif %} {{ block.shopify_attributes }}>
+            <div class="gg-card__media">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | default: product.title | escape }}" loading="lazy" width="403" height="538">
+              {%- elsif block.settings.image_asset != blank -%}
+                <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.title | default: product.title | escape }}" loading="lazy" width="403" height="538">
+              {%- elsif product != blank and product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="403" height="538">
+              {%- else -%}
+                <img src="{{ 'gg-p-miranda.png' | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="403" height="538">
+              {%- endif -%}
+              <div class="gg-card__top">
+                <span class="gg-card__logo">
+                  {%- if block.settings.logo != blank -%}
+                    <img src="{{ block.settings.logo | image_url: width: 80 }}" alt="" loading="lazy" width="36" height="36">
+                  {%- elsif section.settings.team_logo != blank -%}
+                    <img src="{{ section.settings.team_logo | image_url: width: 80 }}" alt="" loading="lazy" width="36" height="36">
+                  {%- elsif collection.metafields.custom.logo != blank -%}
+                    <img src="{{ collection.metafields.custom.logo | image_url: width: 80 }}" alt="" loading="lazy" width="36" height="36">
+                  {%- else -%}
+                    {% render 'gg-sports-logo', product: block.settings.product %}
+                  {%- endif -%}
+                </span>
+                <svg class="gg-card__heart" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+              </div>
+            </div>
+            <div class="gg-card__body">
+              <h3 class="gg-card__title">{{ block.settings.title | default: product.title }}</h3>
+              {%- if section.settings.show_price -%}
+                {%- if block.settings.price != blank -%}
+                  <div class="gg-card__price">{{ block.settings.price }}</div>
+                {%- elsif product != blank -%}
+                  <div class="gg-card__price">{{ product.price | money }}</div>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- elsif grid_collection != blank and grid_collection.products.size > 0 -%}
+        {%- for product in grid_collection.products limit: grid_cap -%}
+          {%- assign gg_card_amz = blank -%}
+          {%- if settings.amazon_links_enabled != false -%}
+            {%- capture gg_card_amz -%}{%- render 'gg-amazon-url', product: product -%}{%- endcapture -%}
+            {%- assign gg_card_amz = gg_card_amz | strip -%}
+          {%- endif -%}
+          {%- if forloop.index > grid_limit -%}
+            {%- assign gg_more_count = gg_more_count | plus: 1 -%}
+          {%- endif -%}
+          <a class="gg-card gg-card--tall" href="{{ gg_card_amz | default: product.url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %}{% if forloop.index > grid_limit %} data-gg-more hidden{% endif %}>
+            <div class="gg-card__media">
+              {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="403" height="538">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'gg-card__ph' }}
+              {%- endif -%}
+              <div class="gg-card__top">
+                <span class="gg-card__logo">
+                  {%- if section.settings.team_logo != blank -%}
+                    <img src="{{ section.settings.team_logo | image_url: width: 80 }}" alt="" loading="lazy" width="36" height="36">
+                  {%- elsif collection.metafields.custom.logo != blank -%}
+                    <img src="{{ collection.metafields.custom.logo | image_url: width: 80 }}" alt="" loading="lazy" width="36" height="36">
+                  {%- else -%}
+                    {% render 'gg-sports-logo', product: product %}
+                  {%- endif -%}
+                </span>
+                <svg class="gg-card__heart" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+              </div>
+            </div>
+            <div class="gg-card__body">
+              <h3 class="gg-card__title">{{ product.title }}</h3>
+              {%- if section.settings.show_price -%}
+                {%- if product.price_varies == false -%}
+                  <div class="gg-card__price">{{ product.price | money }}</div>
+                {%- elsif product.price_varies -%}
+                  <div class="gg-card__price">{{ product.price_min | money }} – {{ product.price_max | money }}</div>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <p class="gg-shopteam__empty">{{ section.settings.no_products | default: 'No products found for this team.' }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign gg_cta_amz = section.settings.load_amz -%}
+    {%- if gg_cta_amz == blank and settings.amazon_links_enabled != false -%}
+      {%- capture gg_cta_amz -%}{%- render 'gg-amazon-url', collection: grid_collection -%}{%- endcapture -%}
+      {%- assign gg_cta_amz = gg_cta_amz | strip -%}
+    {%- endif -%}
+    {%- if gg_cta_amz == blank and settings.amazon_links_enabled != false -%}
+      {%- capture gg_cta_amz -%}{%- render 'gg-amazon-url', product: gg_first_block_product -%}{%- endcapture -%}
+      {%- assign gg_cta_amz = gg_cta_amz | strip -%}
+    {%- endif -%}
+    {%- assign gg_cta_href = gg_cta_amz | default: section.settings.load_link | default: routes.collections_url -%}
+
+    {%- if section.settings.load_btn != blank or section.settings.load_done_btn != blank -%}
+      <div class="gg-center gg-center--cta">
+        {%- if gg_more_count > 0 and section.settings.load_btn != blank -%}
+          <button type="button" class="gg-btn gg-btn--primary gg-btn--serif"
+            data-gg-load-more
+            data-gg-batch="{{ grid_limit }}"
+            data-gg-done-href="{{ gg_cta_href }}"
+            data-gg-done-label="{{ section.settings.load_done_btn | escape }}">
+            {{ section.settings.load_btn }}
+          </button>
+        {%- elsif section.settings.load_done_btn != blank -%}
+          <a class="gg-btn gg-btn--primary gg-btn--serif" href="{{ gg_cta_href }}"{% if gg_cta_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>
+            {{ section.settings.load_done_btn }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "G/G Team Products Grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": true },
+    { "type": "text", "id": "breadcrumb_label", "label": "Breadcrumb label", "info": "Defaults to the collection title." },
+    { "type": "text", "id": "title", "label": "Heading" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext" },
+    { "type": "image_picker", "id": "team_logo", "label": "Team logo for cards", "info": "Used on the corner of product cards. Defaults to collection logo." },
+    { "type": "collection", "id": "products_collection", "label": "Override collection", "info": "Defaults to the current collection page when left empty." },
+    { "type": "range", "id": "products_to_show", "label": "Products to show initially", "min": 4, "max": 24, "step": 4, "default": 8 },
+    { "type": "checkbox", "id": "show_all_products", "label": "Show all products at once (hide View More)", "default": true },
+    { "type": "checkbox", "id": "show_price", "label": "Show product price", "default": true },
+    { "type": "text", "id": "no_products", "label": "Empty state text", "default": "No products found for this team." },
+    { "type": "text", "id": "load_btn", "label": "Load more button", "default": "Load More ..." },
+    { "type": "url", "id": "load_link", "label": "Load more link" },
+    { "type": "text", "id": "load_done_btn", "label": "Button shown when nothing is left to load", "default": "Shop the collection on Amazon" },
+    { "type": "url", "id": "load_amz", "label": "Amazon link for that button", "info": "Leave empty to use the Amazon link of the collection, or of the first product in the grid." }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product (optional)" },
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "image_asset", "label": "Or image asset filename", "info": "e.g. gg-osu-intarsia-sweater.jpg" },
+        { "type": "text", "id": "title", "label": "Product Title", "default": "PRODUCT NAME" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$124" },
+        { "type": "url", "id": "amazon_url", "label": "Amazon Link" },
+        { "type": "url", "id": "link", "label": "Fallback link" },
+        { "type": "image_picker", "id": "logo", "label": "Card Team Logo override" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "G/G Team Products Grid"
+    }
+  ]
+}
+{% endschema %}

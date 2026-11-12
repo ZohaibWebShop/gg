@@ -1,0 +1,25 @@
+{%- comment -%}
+  Renders a plain-text setting as one block-level line per authored line break,
+  so copy typed in a single-line editor field still breaks where it should.
+
+  Accepted separators: <br>, <br/>, <br /> and " / ". Only " / " with spaces
+  on both sides counts as a break, which leaves brand names like "g/g" intact.
+
+  Usage: {% render 'gg-breaks', text: value, class: 'my-line-class' %}
+{%- endcomment -%}
+
+{%- assign gg_breaks_text = text | strip -%}
+
+{%- if gg_breaks_text != blank -%}
+  {%- assign gg_breaks_text = gg_breaks_text | replace: ' / ', ' <br> ' -%}
+  {%- assign gg_breaks_text = gg_breaks_text | replace: '<br/>', '<br>' -%}
+  {%- assign gg_breaks_text = gg_breaks_text | replace: '<br />', '<br>' -%}
+  {%- assign gg_breaks_lines = gg_breaks_text | split: '<br>' -%}
+
+  {%- for gg_breaks_line in gg_breaks_lines -%}
+    {%- assign gg_breaks_line = gg_breaks_line | strip -%}
+    {%- if gg_breaks_line != blank -%}
+      <span class="{{ class }}">{{ gg_breaks_line }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

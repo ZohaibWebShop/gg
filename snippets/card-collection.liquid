@@ -8,6 +8,7 @@
   - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
   - wrapper_class: {String} Wrapper class for card (optional)
   - placeholder_image: {String} Placeholder image when collection is empty (optional)
+  - show_amazon: {Boolean} Show the "Buy on Amazon" button when the collection resolves to an Amazon link. Default: true (optional)
 
   Usage:
   {% render 'card-collection' %}
@@ -28,6 +29,14 @@
   if wrapper_class == null or wrapper_class == 'none'
     assign card_color_scheme = settings.collection_card_color_scheme
     assign card_style = settings.collection_card_style
+  endif
+
+  assign gg_amz_url = blank
+  if settings.amazon_links_enabled != false and show_amazon != false and card_collection != blank
+    capture gg_amz_capture
+      render 'gg-amazon-url', collection: card_collection
+    endcapture
+    assign gg_amz_url = gg_amz_capture | strip
   endif
 -%}
 
@@ -111,6 +120,11 @@
                   {{- 'icon-arrow.svg' | inline_asset_content -}}
                 </span>
               </p>
+            {%- endif -%}
+            {%- if gg_amz_url != blank -%}
+              <div class="card__amazon">
+                {%- render 'gg-amazon-button', amazon_url: gg_amz_url, class: 'card__amazon-link' -%}
+              </div>
             {%- endif -%}
           </div>
         </div>

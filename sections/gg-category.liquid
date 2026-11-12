@@ -2,19 +2,27 @@
   <div class="gg-container">
     <div class="gg-head-row">
       <div class="gg-head-row__left">
-        <h2 class="gg-h" style="font-size:clamp(36px,3.6vw,56px);">{{ section.settings.title | default: 'Your Starting Lineup' }}</h2>
+        <h2 class="gg-categories__title">{{ section.settings.title | default: 'Your Starting Lineup' }}</h2>
       </div>
       <div class="gg-head-row__right">
-        <a class="gg-btn gg-btn--secondary gg-btn--serif gg-btn--round" href="{{ section.settings.all_link | default: routes.collections_url }}">
+        <a class="gg-btn gg-btn--secondary gg-btn--serif gg-btn--round" href="{{ section.settings.all_link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: section.settings.all_link %}>
           {{ section.settings.all_label | default: 'Explore All Products' }}
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M24.5205 12.5L16.0328 20.9877L14.0293 18.9843L19.0474 13.9662L1.85526 13.8764L1.90639 11.0725L19.2201 11.1649L13.961 5.9058L15.9437 3.92315L24.5205 12.5Z" fill="#F26728"/></svg>
         </a>
       </div>
     </div>
 
     <div class="gg-cat-grid">
       {%- for block in section.blocks -%}
-        <a class="gg-cat" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
-          <div class="gg-cat__bg" style="background-image:url('{{ block.settings.image_asset | default: 'gg-cat-jacket.png' | asset_url }}')"></div>
+        {%- if block.settings.image != blank -%}
+          {%- assign cat_image = block.settings.image | image_url: width: 900 -%}
+        {%- else -%}
+          {%- assign cat_image = block.settings.image_asset | default: 'gg-cat-jacket.png' | asset_url -%}
+        {%- endif -%}
+        <a class="gg-cat" href="{{ block.settings.link | default: routes.collections_url }}"{% render 'gg-link-attrs', url: block.settings.link %} {{ block.shopify_attributes }}>
+          <div class="gg-cat__bg">
+            <img src="{{ cat_image }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="408" height="560">
+          </div>
           <div class="gg-cat__overlay"></div>
           <div class="gg-cat__body">
             <h3 class="gg-cat__title">{{ block.settings.title }}</h3>
@@ -42,6 +50,7 @@
       "type": "category",
       "name": "Category",
       "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "select", "id": "image_asset", "label": "Default image", "options": [
           { "value": "gg-cat-sweater.png", "label": "Sweater" },
           { "value": "gg-cat-hoodie.png", "label": "Hoodie" },

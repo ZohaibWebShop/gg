@@ -1,0 +1,27 @@
+{% comment %}
+  Outputs target/rel attributes for an anchor. External URLs open in a new tab.
+
+  Accepts:
+  - url: {String} Anchor URL (required)
+  - new_tab: {Boolean} Force or prevent a new tab. Default: auto-detect external (optional)
+
+  Usage:
+  <a href="{{ link.url }}"{% render 'gg-link-attrs', url: link.url %}>
+{% endcomment %}
+
+{%- liquid
+  assign gg_attr_url = url | default: '' | strip
+  assign gg_attr_external = false
+  if gg_attr_url contains '://' or gg_attr_url contains '//' or gg_attr_url contains 'www.'
+    assign gg_attr_external = true
+    if gg_attr_url contains request.host
+      assign gg_attr_external = false
+    endif
+  endif
+  if new_tab == true
+    assign gg_attr_external = true
+  elsif new_tab == false
+    assign gg_attr_external = false
+  endif
+-%}
+{%- if gg_attr_external %} target="_blank" rel="noopener noreferrer"{% endif -%}

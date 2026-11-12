@@ -1,24 +1,134 @@
+{%- liquid
+  assign gg_follow = section.settings.follow_link | default: '#'
+  assign gg_source = section.settings.source | default: 'manual'
+  assign gg_row_1 = ''
+  assign gg_row_1_dup = ''
+  assign gg_row_2 = ''
+  assign gg_row_2_dup = ''
+  assign gg_n1 = 0
+  assign gg_n2 = 0
+-%}
+
+{%- for block in section.blocks -%}
+  {%- if block.type == 'top_image' or block.type == 'bottom_image' -%}
+    {%- if block.settings.image != blank -%}
+      {%- assign gg_href = block.settings.link | default: gg_follow -%}
+      {%- assign gg_alt = block.settings.alt | default: block.settings.image.alt | default: 'Social image' -%}
+      {%- capture gg_img -%}<img src="{{ block.settings.image | image_url: width: 880 }}" alt="{{ gg_alt | escape }}" loading="lazy" width="440" height="440">{%- endcapture -%}
+      {%- capture gg_item -%}<a href="{{ gg_href }}"{% render 'gg-link-attrs', url: gg_href %} aria-label="{{ gg_alt | escape }}" {{ block.shopify_attributes }}>{{ gg_img }}</a>{%- endcapture -%}
+      {%- comment -%} Extra loop copies use this attribute-free variant so only the first set carries block outlines. {%- endcomment -%}
+      {%- capture gg_item_dup -%}<a href="{{ gg_href }}"{% render 'gg-link-attrs', url: gg_href %} aria-label="{{ gg_alt | escape }}">{{ gg_img }}</a>{%- endcapture -%}
+      {%- if block.type == 'top_image' -%}
+        {%- assign gg_n1 = gg_n1 | plus: 1 -%}
+        {%- assign gg_row_1 = gg_row_1 | append: gg_item -%}
+        {%- assign gg_row_1_dup = gg_row_1_dup | append: gg_item_dup -%}
+      {%- else -%}
+        {%- assign gg_n2 = gg_n2 | plus: 1 -%}
+        {%- assign gg_row_2 = gg_row_2 | append: gg_item -%}
+        {%- assign gg_row_2_dup = gg_row_2_dup | append: gg_item_dup -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Repeat each row until the track is at least ~5120px wide (2 × a 2560px
+  viewport) and always an even number of sets. The −50% marquee loop then
+  never reveals empty space, even with a single image in a row.
+{%- endcomment -%}
+{%- liquid
+  assign gg_sets_1 = 0
+  assign gg_sets_2 = 0
+
+  if gg_n1 > 0
+    assign gg_width_1 = gg_n1 | times: 456
+    assign gg_sets_1 = 5120 | divided_by: gg_width_1
+    assign gg_total_1 = gg_sets_1 | times: gg_width_1
+    if gg_total_1 < 5120
+      assign gg_sets_1 = gg_sets_1 | plus: 1
+    endif
+    if gg_sets_1 < 2
+      assign gg_sets_1 = 2
+    endif
+    assign gg_odd_1 = gg_sets_1 | modulo: 2
+    if gg_odd_1 == 1
+      assign gg_sets_1 = gg_sets_1 | plus: 1
+    endif
+  endif
+
+  if gg_n2 > 0
+    assign gg_width_2 = gg_n2 | times: 456
+    assign gg_sets_2 = 5120 | divided_by: gg_width_2
+    assign gg_total_2 = gg_sets_2 | times: gg_width_2
+    if gg_total_2 < 5120
+      assign gg_sets_2 = gg_sets_2 | plus: 1
+    endif
+    if gg_sets_2 < 2
+      assign gg_sets_2 = 2
+    endif
+    assign gg_odd_2 = gg_sets_2 | modulo: 2
+    if gg_odd_2 == 1
+      assign gg_sets_2 = gg_sets_2 | plus: 1
+    endif
+  endif
+-%}
+
 <section class="gg-section gg-social">
   <div class="gg-container">
     <div class="gg-head-row">
       <div class="gg-head-row__left">
         <span class="gg-eyebrow">{{ section.settings.eyebrow | default: 'Stay Social' }}</span>
-        <h2 class="gg-h--serif" style="font-size:clamp(34px,3.6vw,56px);">{{ section.settings.title | default: 'Show us how you wear g/g.' }}</h2>
+        {%- assign gg_title = section.settings.title | default: 'Show us how you wear g/g.' -%}
+        <h2 class="gg-h--serif gg-social__title" style="font-size:clamp(34px,3.6vw,56px);">
+          {%- assign gg_title_parts = gg_title | split: 'g/g' -%}
+          {%- for part in gg_title_parts -%}
+            {{- part -}}
+            {%- unless forloop.last -%}<span class="gg-social__title-mark">g/g</span>{%- endunless -%}
+          {%- endfor -%}
+        </h2>
       </div>
       <div class="gg-head-row__right">
-        <a class="gg-btn gg-btn--secondary gg-btn--serif gg-btn--round" href="{{ section.settings.follow_link | default: '#' }}">
+        <a class="gg-btn gg-btn--secondary gg-btn--serif gg-social__follow" href="{{ section.settings.follow_link | default: '#' }}"{% render 'gg-link-attrs', url: section.settings.follow_link %}>
           {{ section.settings.follow_label | default: 'Follow us' }}
+          <svg class="gg-social__follow-icon" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23 13L15.5108 20.4892L13.7431 18.7214L18.1708 14.2937L3.00125 14.2145L3.04636 11.7404L18.3232 11.822L13.6828 7.18159L15.4322 5.43219L23 13Z" fill="#F26728"/></svg>
         </a>
       </div>
     </div>
 
-    <div class="gg-social__grid">
-      {%- for i in (1..7) -%}
-        <a href="{{ section.settings.follow_link | default: '#' }}" aria-label="Social image {{ i }}">
-          <img src="{{ 'gg-social-' | append: i | append: '.png' | asset_url }}" alt="Social image {{ i }}" loading="lazy" width="440" height="440">
-        </a>
-      {%- endfor -%}
+    {%- liquid
+      assign gg_ig_token = ''
+      assign gg_ig_link = section.settings.ig_link | default: gg_follow
+      if gg_source == 'instagram'
+        assign gg_ig_token = section.settings.ig_access_token
+      endif
+    -%}
+
+    <div class="gg-social__grid" data-gg-marquee{% if gg_ig_token != blank %} data-gg-instagram="{{ gg_ig_token | escape }}" data-gg-instagram-count="{{ section.settings.ig_post_count | default: 8 }}" data-gg-instagram-link="{{ gg_ig_link }}"{% endif %}>
+      {%- if gg_row_1 != blank or gg_source == 'instagram' -%}
+        <div class="gg-social__row" data-gg-marquee-row="1">
+          <div class="gg-social__track" data-gg-track>{{ gg_row_1 }}{%- for gg_s in (2..gg_sets_1) -%}{{ gg_row_1_dup }}{%- endfor -%}</div>
+        </div>
+      {%- endif -%}
+      {%- if gg_row_2 != blank or gg_source == 'instagram' -%}
+        <div class="gg-social__row" data-gg-marquee-row="2">
+          <div class="gg-social__track" data-gg-track>{{ gg_row_2 }}{%- for gg_s in (2..gg_sets_2) -%}{{ gg_row_2_dup }}{%- endfor -%}</div>
+        </div>
+      {%- endif -%}
     </div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}
+        {% render block %}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if request.design_mode -%}
+      {%- if gg_source == 'instagram' and gg_ig_token == blank -%}
+        <p class="gg-social__note">Add an Instagram access token in the section settings to load the feed. Your image blocks are shown until then.</p>
+      {%- elsif gg_row_1 == blank and gg_row_2 == blank -%}
+        <p class="gg-social__note">Add "Top row image" and "Bottom row image" blocks to show your social images.</p>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </section>
 
@@ -29,8 +139,51 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stay Social" },
     { "type": "text", "id": "title", "label": "Title", "default": "Show us how you wear g/g." },
     { "type": "text", "id": "follow_label", "label": "Follow label", "default": "Follow us" },
-    { "type": "url", "id": "follow_link", "label": "Follow link" }
+    { "type": "url", "id": "follow_link", "label": "Follow link" },
+    { "type": "header", "content": "Images" },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Show images from",
+      "default": "manual",
+      "options": [
+        { "value": "manual", "label": "Image blocks (manual)" },
+        { "value": "instagram", "label": "Instagram feed" }
+      ],
+      "info": "Image blocks: add Top row / Bottom row blocks below. Instagram: needs an access token — your blocks stay visible until the feed loads (or if it fails)."
+    },
+    { "type": "header", "content": "Instagram feed" },
+    {
+      "type": "text",
+      "id": "ig_access_token",
+      "label": "Access token",
+      "info": "Instagram Graph API long-lived token (fields: id, caption, media_url, permalink). The feed is fetched in the browser."
+    },
+    { "type": "range", "id": "ig_post_count", "label": "Number of posts", "min": 4, "max": 16, "step": 1, "default": 8 },
+    { "type": "url", "id": "ig_link", "label": "Fallback link", "info": "Used when a post has no permalink. Defaults to the Follow link." }
   ],
+  "blocks": [
+    {
+      "type": "top_image",
+      "name": "Top row image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Link (optional)", "info": "Defaults to the Follow link." },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    },
+    {
+      "type": "bottom_image",
+      "name": "Bottom row image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Link (optional)", "info": "Defaults to the Follow link." },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "max_blocks": 16,
   "presets": [{ "name": "G/G Social Community" }]
 }
 {% endschema %}
