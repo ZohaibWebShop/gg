@@ -1292,6 +1292,7 @@ body.gg-menu-open {
 }
 
 .gg-team-logos__item {
+  position: relative;
   flex: 0 0 14.5%;
   min-width: 0;
   display: flex;
@@ -1301,6 +1302,44 @@ body.gg-menu-open {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+}
+
+/* Small clear-filter cross shown on the selected team logo */
+.gg-team-logos__clear {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gg-orange);
+  color: var(--gg-white);
+  box-shadow: 0 2px 6px rgba(12, 48, 84, 0.25);
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.gg-team-logos__item.is-active .gg-team-logos__clear {
+  display: inline-flex;
+}
+
+.gg-team-logos__clear:hover,
+.gg-team-logos__clear:focus-visible {
+  background: var(--gg-navy);
+  transform: scale(1.08);
+  outline: none;
+}
+
+.gg-team-logos__clear svg {
+  display: block;
+  width: 10px;
+  height: 10px;
 }
 
 .gg-team-logos__item.is-active {
@@ -1587,6 +1626,141 @@ body.gg-menu-open {
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
 }
 
+button.gg-card__heart {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gg-navy, #0c3054);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+button.gg-card__heart:hover {
+  transform: scale(1.15);
+}
+
+button.gg-card__heart:active {
+  transform: scale(0.92);
+}
+
+.gg-card__heart .wls-heart__svg {
+  width: 29px;
+  height: 29px;
+}
+
+.gg-card__heart--placeholder {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ============================================================
+   WishlistSuite SDK — Custom Hearts & Buttons
+   ============================================================ */
+:root {
+  --wls-heart-color: var(--gg-navy, #0c3054);
+  --wls-heart-active-color: var(--gg-orange, #f26728);
+}
+
+.wls-heart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: var(--wls-heart-color);
+  line-height: 1;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wls-heart:focus-visible {
+  outline: 2px solid var(--gg-orange, #f26728);
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+.wls-heart__svg {
+  display: block;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.wls-heart__svg path {
+  stroke: none !important;
+  transition: fill 0.2s ease;
+}
+
+.wls-heart .wls-heart__path-outline {
+  display: block;
+}
+
+.wls-heart .wls-heart__path-filled {
+  display: none;
+}
+
+/* Badge style for standard card-product.liquid */
+.card-wrapper {
+  position: relative;
+}
+
+.wls-heart--badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 8px rgba(12, 48, 84, 0.16);
+  color: var(--wls-heart-color);
+}
+
+.wls-heart--badge:hover {
+  transform: scale(1.1);
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(12, 48, 84, 0.22);
+}
+
+.wls-heart--badge:active {
+  transform: scale(0.92);
+}
+
+.wls-heart--badge .wls-heart__svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Filled / Wishlisted state */
+.wls-heart.is-filled {
+  color: var(--wls-heart-active-color);
+}
+
+.wls-heart.is-filled .wls-heart__path-outline {
+  display: none;
+}
+
+.wls-heart.is-filled .wls-heart__path-filled {
+  display: block;
+}
+
+.wls-heart.is-filled .wls-heart__svg {
+  animation: wlsHeartPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes wlsHeartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
 .gg-card__body {
   padding: 18px 2px 0;
 }
@@ -1621,11 +1795,29 @@ body.gg-menu-open {
     width: auto;
   }
 
-  .gg-card__heart {
+  .gg-card__heart,
+  button.gg-card__heart {
     width: 22px;
     height: 22px;
     flex: 0 0 auto;
     filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .35));
+  }
+
+  .gg-card__heart .wls-heart__svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .wls-heart--badge {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .wls-heart--badge .wls-heart__svg {
+    width: 17px;
+    height: 17px;
   }
 
   .gg-card__title {

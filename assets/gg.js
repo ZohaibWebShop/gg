@@ -96,15 +96,146 @@
       });
     }
 
-    // Wishlist hearts
-    document.querySelectorAll('.gg-card__heart').forEach(function (heart) {
-      heart.addEventListener('click', function (e) {
+    // ============================================================
+    // WishlistSuite SDK — Custom Product Card Hearts
+    // ============================================================
+    (function initWishlistSuite() {
+      if (window.__wlsCollectionHeartsInitialized) return;
+      window.__wlsCollectionHeartsInitialized = true;
+
+      function paintHeart(btn, isWishlisted) {
+        if (!btn) return;
+        var inList = Boolean(isWishlisted);
+        btn.classList.toggle('is-filled', inList);
+        btn.setAttribute('data-filled', inList ? 'true' : 'false');
+        btn.setAttribute('aria-pressed', inList ? 'true' : 'false');
+        btn.setAttribute('aria-label', inList ? 'Remove from wishlist' : 'Add to wishlist');
+      }
+
+      function getCachedSavedIds() {
+        try {
+          var raw = localStorage.getItem('wishlistVariantIds');
+          if (!raw) return [];
+          var parsed = JSON.parse(raw);
+          return Array.isArray(parsed) ? parsed.map(String) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function paintAllFromCache() {
+        var saved = getCachedSavedIds();
+        var hearts = document.querySelectorAll('.wls-heart');
+        hearts.forEach(function (btn) {
+          var vid = btn.dataset.variant ? String(btn.dataset.variant) : '';
+          var pid = btn.dataset.id ? String(btn.dataset.id) : '';
+          var inList = (vid && saved.indexOf(vid) > -1) || (pid && saved.indexOf(pid) > -1);
+          paintHeart(btn, inList);
+        });
+      }
+
+      // 1. Instant paint on page load (zero flicker)
+      paintAllFromCache();
+
+      // 2. Delegate click events for all hearts (handles dynamic AJAX / filters / Load More)
+      // Capturing phase ensures we intercept click before parent <a> card links fire
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.wls-heart');
+        if (!btn) return;
+
+        // Prevent opening card link / parent anchors
         e.preventDefault();
-        const filled = heart.getAttribute('data-filled') === 'true';
-        heart.setAttribute('data-filled', String(!filled));
-        heart.style.fill = filled ? 'none' : 'currentColor';
-      });
-    });
+        e.stopPropagation();
+
+        var pid = btn.dataset.id ? String(btn.dataset.id) : '';
+        var vid = btn.dataset.variant ? String(btn.dataset.variant) : '';
+        if (!pid && !vid) return;
+
+        var nextState = !btn.classList.contains('is-filled');
+        paintHeart(btn, nextState); // Optimistic UI toggle
+
+        var toggleData = {
+          productId:     pid,
+          variantId:     vid,
+          productHandle: btn.dataset.handle || '',
+          productTitle:  btn.dataset.title || '',
+          productImage:  btn.dataset.image || ''
+        };
+
+        var doToggle = function (wls) {
+          if (!wls || typeof wls.toggle !== 'function') return;
+          wls.toggle(toggleData).then(function (res) {
+            if (res && typeof res.isWishlisted !== 'undefined') {
+              paintHeart(btn, res.isWishlisted);
+            }
+          }).catch(function (err) {
+            console.error('[WishlistSuite] Toggle failed:', err);
+            paintHeart(btn, !nextState); // Revert on failure
+          });
+        };
+
+        if (window.WishlistSuite) {
+          doToggle(window.WishlistSuite);
+        } else {
+          window.WishlistCallbacks = window.WishlistCallbacks || [];
+          window.WishlistCallbacks.push(doToggle);
+        }
+      }, true);
+
+      // 3. Register with WishlistSuite SDK for two-way synchronization
+      var registerWithSdk = function (wls) {
+        if (!wls || typeof wls.on !== 'function') return;
+
+        // Sync when ANY button or launcher changes a product state
+        wls.on('change', function (d) {
+          if (!d) return;
+          var changePid = d.productId ? String(d.productId) : '';
+          var changeVid = d.variantId ? String(d.variantId) : '';
+          var hearts = document.querySelectorAll('.wls-heart');
+          hearts.forEach(function (btn) {
+            var btnPid = btn.dataset.id ? String(btn.dataset.id) : '';
+            var btnVid = btn.dataset.variant ? String(btn.dataset.variant) : '';
+            if ((changePid && btnPid === changePid) || (changeVid && btnVid === changeVid)) {
+              paintHeart(btn, d.isWishlisted);
+            }
+          });
+        });
+
+        // Exact confirmation check for visible hearts if isWishlisted is available
+        if (typeof wls.isWishlisted === 'function') {
+          var hearts = document.querySelectorAll('.wls-heart');
+          hearts.forEach(function (btn) {
+            var pid = btn.dataset.id;
+            var vid = btn.dataset.variant;
+            if (pid) {
+              wls.isWishlisted(pid, vid).then(function (inList) {
+                paintHeart(btn, inList);
+              }).catch(function () {});
+            }
+          });
+        }
+      };
+
+      if (window.WishlistSuite) {
+        registerWithSdk(window.WishlistSuite);
+      } else {
+        window.WishlistCallbacks = window.WishlistCallbacks || [];
+        window.WishlistCallbacks.push(registerWithSdk);
+      }
+
+      // Re-check cache if DOM changes (e.g. faceted search, load more, collections)
+      if (typeof MutationObserver !== 'undefined') {
+        var observer = new MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            if (mutations[i].addedNodes.length > 0) {
+              paintAllFromCache();
+              break;
+            }
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    })();
 
     // Footer language selector (only rendered when 2+ languages are published)
     document.querySelectorAll('[data-gg-lang-select]').forEach(function (select) {
@@ -382,6 +513,7 @@
     // Shop by Team — in-page team filtering strictly by selected collection
     document.querySelectorAll('.gg-shopteam').forEach(function (section) {
       const logos = section.querySelectorAll('.gg-team-logos__item[data-gg-team-filter]');
+      const clears = section.querySelectorAll('[data-gg-team-clear]');
       const grid = section.querySelector('[data-gg-load-grid]');
       const showAll = section.querySelector('[data-gg-team-showall]');
       const cards = grid ? grid.querySelectorAll('.gg-card') : [];
@@ -401,6 +533,7 @@
 
         cards.forEach(function (c) {
           const isMore = c.hasAttribute('data-gg-more');
+          const isTeamOnly = c.hasAttribute('data-gg-team-only');
           let shouldShow;
 
           if (f) {
@@ -411,7 +544,9 @@
               shouldShow = tokens.indexOf(f) !== -1;
             }
           } else {
-            shouldShow = !isMore || c.getAttribute('data-gg-more-shown') === '1';
+            // Default view: added product items only. Team collection products
+            // stay hidden until a team logo is selected.
+            shouldShow = !isTeamOnly && (!isMore || c.getAttribute('data-gg-more-shown') === '1');
           }
 
           if (shouldShow) {
@@ -440,8 +575,11 @@
 
       logos.forEach(function (el) {
         el.addEventListener('click', function (e) {
-          e.preventDefault();
           const f = (el.getAttribute('data-gg-team-filter') || '').trim().toLowerCase();
+          // Logos without a collection cannot map to products, so let the
+          // normal link behave instead of emptying the grid.
+          if (!f || f.indexOf('__none__') === 0) return;
+          e.preventDefault();
           if (activeFilter && f === activeFilter) {
             applyFilter(null);
           } else {
@@ -449,6 +587,19 @@
           }
         });
       });
+
+      clears.forEach(function (btn) {
+        const clear = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          applyFilter(null);
+        };
+        btn.addEventListener('click', clear);
+        btn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') clear(e);
+        });
+      });
+
       if (showAll) {
         showAll.addEventListener('click', function (e) {
           e.preventDefault();

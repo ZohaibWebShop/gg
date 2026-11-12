@@ -1,0 +1,73 @@
+{% comment %}
+  WishlistSuite SDK — Collection Hearts Integration Section
+  https://wishlistsuite-1.gitbook.io/wishlistsuite-help-doc/app-overview/building-custom-wishlist-buttons-using-the-wishlistsuite-sdk
+{% endcomment %}
+
+<style>
+  .card-wrapper { position: relative; }
+  .wls-heart {
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  if (typeof window.__wlsCollectionHeartsInitialized === 'undefined') {
+    (function () {
+      function paint(btn, inList) {
+        if (!btn) return;
+        btn.classList.toggle('is-filled', Boolean(inList));
+        btn.setAttribute('data-filled', inList ? 'true' : 'false');
+      }
+
+      var saved = JSON.parse(localStorage.getItem('wishlistVariantIds') || '[]').map(String);
+      var hearts = document.querySelectorAll('.wls-heart');
+      hearts.forEach(function (btn) {
+        paint(btn, saved.indexOf(btn.dataset.variant) > -1 || saved.indexOf(btn.dataset.id) > -1);
+      });
+
+      window.WishlistCallbacks = window.WishlistCallbacks || [];
+      window.WishlistCallbacks.push(function (wls) {
+        hearts.forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var next = !btn.classList.contains('is-filled');
+            paint(btn, next);
+            wls.toggle({
+              productId:     btn.dataset.id,
+              variantId:     btn.dataset.variant,
+              productHandle: btn.dataset.handle,
+              productTitle:  btn.dataset.title,
+              productImage:  btn.dataset.image
+            }).then(function (r) {
+              if (r && typeof r.isWishlisted !== 'undefined') {
+                paint(btn, r.isWishlisted);
+              }
+            });
+          });
+        });
+
+        wls.on('change', function (d) {
+          if (!d) return;
+          hearts.forEach(function (btn) {
+            if (btn.dataset.id === String(d.productId)) {
+              paint(btn, d.isWishlisted);
+            }
+          });
+        });
+      });
+    })();
+  }
+</script>
+
+{% schema %}
+{
+  "name": "WLS Collection Hearts",
+  "settings": [],
+  "presets": [
+    {
+      "name": "WLS Collection Hearts"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,63 @@
+{% comment %}
+  Renders WishlistSuite SDK heart button for product cards.
+
+  Accepts:
+  - product: {Object} Shopify Product Liquid object (required)
+  - card_product: {Object} Fallback for Dawn product card snippet
+  - class: {String} Extra classes (optional, e.g. 'gg-card__heart')
+  - style_mode: {String} 'badge' (white circular badge for standard product cards) or 'icon' (naked icon for custom card tops)
+
+  Usage:
+  {% render 'wls-card-heart', product: card_product, style_mode: 'badge' %}
+  {% render 'wls-card-heart', product: product, class: 'gg-card__heart' %}
+{% endcomment %}
+
+{%- liquid
+  assign target_product = product
+  if target_product == blank
+    assign target_product = card_product
+  endif
+-%}
+
+{%- if target_product != blank and target_product.id != blank -%}
+  {%- liquid
+    assign wls_variant = target_product.selected_or_first_available_variant
+    assign wls_img_url = target_product.featured_image | image_url: width: 300
+    if wls_img_url == blank and target_product.featured_media != blank
+      assign wls_img_url = target_product.featured_media | image_url: width: 300
+    endif
+  -%}
+  <button
+    type="button"
+    class="wls-heart{% if class %} {{ class }}{% endif %}{% if style_mode == 'badge' %} wls-heart--badge{% endif %}"
+    data-id="{{ target_product.id }}"
+    data-variant="{{ wls_variant.id }}"
+    data-handle="{{ target_product.handle }}"
+    data-title="{{ target_product.title | escape }}"
+    data-image="{{ wls_img_url }}"
+    aria-label="Add to wishlist"
+    title="Add to wishlist"
+  >
+    <svg
+      class="gg-card__heart-svg wls-heart__svg"
+      width="29"
+      height="29"
+      viewBox="0 0 29 29"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        class="wls-heart__path-outline"
+        d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z"
+        fill="currentColor"
+      />
+      <path
+        class="wls-heart__path-filled"
+        d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989Z"
+        fill="currentColor"
+      />
+    </svg>
+  </button>
+{%- endif -%}

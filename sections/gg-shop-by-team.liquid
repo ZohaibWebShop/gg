@@ -33,10 +33,23 @@
               {%- else -%}
                 {%- assign team_logo = block.settings.image_asset | default: 'gg-team-1.png' | asset_url -%}
               {%- endif -%}
-              {%- if block.settings.collection != blank -%}
-                {%- assign team_href = block.settings.collection.url -%}
-                {%- assign team_label = block.settings.collection.title -%}
-                {%- assign team_filter = block.settings.collection.handle -%}
+              {%- assign team_coll = block.settings.collection -%}
+              {%- assign derived_handle = blank -%}
+              {%- if team_coll == blank and block.settings.image != blank -%}
+                {%- assign img_file = block.settings.image | split: '/' | last | split: '?' | first | split: '.' | first -%}
+                {%- assign derived_handle = img_file | handleize -%}
+                {%- if collections[derived_handle] != blank -%}
+                  {%- assign team_coll = collections[derived_handle] -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if team_coll != blank -%}
+                {%- assign team_href = team_coll.url -%}
+                {%- assign team_label = team_coll.title -%}
+                {%- assign team_filter = team_coll.handle -%}
+              {%- elsif derived_handle != blank -%}
+                {%- assign team_href = block.settings.link | default: routes.collections_url -%}
+                {%- assign team_label = img_file | replace: '_', ' ' | replace: '-', ' ' | capitalize -%}
+                {%- assign team_filter = derived_handle -%}
               {%- else -%}
                 {%- assign team_href = block.settings.link | default: routes.collections_url -%}
                 {%- assign team_label = 'Team logo' -%}
@@ -44,6 +57,9 @@
               {%- endif -%}
               <a class="gg-team-logos__item" href="{{ team_href }}"{% render 'gg-link-attrs', url: team_href %} data-gg-team-filter="{{ team_filter }}" aria-label="{{ team_label | escape }}" {{ block.shopify_attributes }}>
                 <img src="{{ team_logo }}" alt="{{ team_label | escape }}" loading="lazy" width="114" height="64">
+                <span class="gg-team-logos__clear" data-gg-team-clear role="button" tabindex="0" aria-label="Clear team filter">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </span>
               </a>
             {%- endif -%}
           {%- endfor -%}
@@ -117,15 +133,23 @@
                   <span class="gg-card__logo">
                     {% render 'gg-sports-logo', product: product %}
                   </span>
-                  <svg class="gg-card__heart" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+                  {%- if product != blank -%}
+                    {% render 'wls-card-heart', product: product, class: 'gg-card__heart' %}
+                  {%- else -%}
+                    <span class="gg-card__heart gg-card__heart--placeholder" aria-hidden="true">
+                      <svg class="gg-card__heart wls-heart__svg" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+                    </span>
+                  {%- endif -%}
                 </div>
               </div>
               <div class="gg-card__body">
                 <h3 class="gg-card__title">{{ product.title }}</h3>
-                {%- if product.price_varies == false -%}
-                  <div class="gg-card__price">{{ product.price | money }}</div>
-                {%- elsif product.price_varies -%}
-                  <div class="gg-card__price">{{ product.price_min | money }} – {{ product.price_max | money }}</div>
+                {%- if product.price_min > 0 -%}
+                  {%- if product.price_varies == false -%}
+                    <div class="gg-card__price">{{ product.price | money }}</div>
+                  {%- elsif product.price_varies -%}
+                    <div class="gg-card__price">{{ product.price_min | money }} – {{ product.price_max | money }}</div>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
             </a>
@@ -134,7 +158,64 @@
       {%- endif -%}
 
       {%- comment -%}
-        Render products strictly from collections selected on Team logo blocks
+        Products added through Product blocks are the default grid items.
+        They are always visible and never held back behind "Load More".
+      {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' and block.settings.product != blank -%}
+          {%- assign product = block.settings.product -%}
+          {%- if gg_first_block_product == blank -%}
+            {%- assign gg_first_block_product = product -%}
+          {%- endif -%}
+          {%- assign pid_check = ',' | append: product.id | append: ',' -%}
+          {%- unless rendered_ids contains pid_check -%}
+            {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
+            {%- assign gg_card_amz = blank -%}
+            {%- if settings.amazon_links_enabled != false -%}
+              {%- capture gg_card_amz -%}{%- render 'gg-amazon-url', product: product -%}{%- endcapture -%}
+              {%- assign gg_card_amz = gg_card_amz | strip -%}
+            {%- endif -%}
+            {%- capture card_team_tags -%}
+              {%- for c in product.collections %}{{ c.handle }} {% endfor -%}
+            {%- endcapture -%}
+            <a class="gg-card gg-card--tall" href="{{ gg_card_amz | default: product.url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }} data-gg-team-tags="{{ card_team_tags | strip }}">
+              <div class="gg-card__media">
+                {%- if product.featured_image != blank -%}
+                  <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="403" height="538">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'gg-card__ph' }}
+                {%- endif -%}
+                <div class="gg-card__top">
+                  <span class="gg-card__logo">
+                    {% render 'gg-sports-logo', product: product %}
+                  </span>
+                  {%- if product != blank -%}
+                    {% render 'wls-card-heart', product: product, class: 'gg-card__heart' %}
+                  {%- else -%}
+                    <span class="gg-card__heart gg-card__heart--placeholder" aria-hidden="true">
+                      <svg class="gg-card__heart wls-heart__svg" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+                    </span>
+                  {%- endif -%}
+                </div>
+              </div>
+              <div class="gg-card__body">
+                <h3 class="gg-card__title">{{ product.title }}</h3>
+                {%- if product.price_min > 0 -%}
+                  {%- if product.price_varies == false -%}
+                    <div class="gg-card__price">{{ product.price | money }}</div>
+                  {%- elsif product.price_varies -%}
+                    <div class="gg-card__price">{{ product.price_min | money }} – {{ product.price_max | money }}</div>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+            </a>
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- comment -%}
+        Products from the Team logo collections stay hidden until a team logo
+        is selected. They are not counted in the default grid or "Load more".
       {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'team' and block.settings.collection != blank -%}
@@ -143,10 +224,6 @@
             {%- assign pid_check = ',' | append: product.id | append: ',' -%}
             {%- unless rendered_ids contains pid_check -%}
               {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
-              {%- assign total_rendered = total_rendered | plus: 1 -%}
-              {%- if total_rendered > grid_limit -%}
-                {%- assign gg_more_count = gg_more_count | plus: 1 -%}
-              {%- endif -%}
               {%- assign gg_card_amz = blank -%}
               {%- if settings.amazon_links_enabled != false -%}
                 {%- capture gg_card_amz -%}{%- render 'gg-amazon-url', product: product -%}{%- endcapture -%}
@@ -156,7 +233,7 @@
                 {{ team_coll.handle }}
                 {%- for c in product.collections %} {{ c.handle }}{%- endfor -%}
               {%- endcapture -%}
-              <a class="gg-card gg-card--tall" href="{{ gg_card_amz | default: product.url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %}{% if total_rendered > grid_limit %} data-gg-more hidden{% endif %} data-gg-team-tags="{{ card_team_tags | strip }}">
+              <a class="gg-card gg-card--tall" href="{{ gg_card_amz | default: product.url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %} data-gg-team-only hidden data-gg-team-tags="{{ card_team_tags | strip }}">
                 <div class="gg-card__media">
                   {%- if product.featured_image -%}
                     <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="403" height="538">
@@ -167,7 +244,13 @@
                     <span class="gg-card__logo">
                       {% render 'gg-sports-logo', product: product %}
                     </span>
-                    <svg class="gg-card__heart" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+                    {%- if product != blank -%}
+                      {% render 'wls-card-heart', product: product, class: 'gg-card__heart' %}
+                    {%- else -%}
+                      <span class="gg-card__heart gg-card__heart--placeholder" aria-hidden="true">
+                        <svg class="gg-card__heart wls-heart__svg" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
+                      </span>
+                    {%- endif -%}
                   </div>
                 </div>
                 <div class="gg-card__body">
@@ -181,57 +264,6 @@
               </a>
             {%- endunless -%}
           {%- endfor -%}
-        {%- endif -%}
-      {%- endfor -%}
-
-      {%- comment -%}
-        Render explicitly selected Product blocks
-      {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'product' and block.settings.product != blank -%}
-          {%- assign product = block.settings.product -%}
-          {%- if gg_first_block_product == blank -%}
-            {%- assign gg_first_block_product = product -%}
-          {%- endif -%}
-          {%- assign pid_check = ',' | append: product.id | append: ',' -%}
-          {%- unless rendered_ids contains pid_check -%}
-            {%- assign rendered_ids = rendered_ids | append: product.id | append: ',' -%}
-            {%- assign total_rendered = total_rendered | plus: 1 -%}
-            {%- if total_rendered > grid_limit -%}
-              {%- assign gg_more_count = gg_more_count | plus: 1 -%}
-            {%- endif -%}
-            {%- assign gg_card_amz = blank -%}
-            {%- if settings.amazon_links_enabled != false -%}
-              {%- capture gg_card_amz -%}{%- render 'gg-amazon-url', product: product -%}{%- endcapture -%}
-              {%- assign gg_card_amz = gg_card_amz | strip -%}
-            {%- endif -%}
-            {%- capture card_team_tags -%}
-              {%- for c in product.collections %}{{ c.handle }} {% endfor -%}
-            {%- endcapture -%}
-            <a class="gg-card gg-card--tall" href="{{ gg_card_amz | default: product.url }}"{% if gg_card_amz != blank %} target="_blank" rel="noopener noreferrer"{% endif %}{% if total_rendered > grid_limit %} data-gg-more hidden{% endif %} {{ block.shopify_attributes }} data-gg-team-tags="{{ card_team_tags | strip }}">
-              <div class="gg-card__media">
-                {%- if product.featured_image != blank -%}
-                  <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="403" height="538">
-                {%- else -%}
-                  {{ 'product-1' | placeholder_svg_tag: 'gg-card__ph' }}
-                {%- endif -%}
-                <div class="gg-card__top">
-                  <span class="gg-card__logo">
-                    {% render 'gg-sports-logo', product: product %}
-                  </span>
-                  <svg class="gg-card__heart" width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5882 5.84989C22.3478 4.60635 20.7037 3.84736 18.9527 3.71003C17.2018 3.5727 15.4594 4.06608 14.0404 5.10104C12.5517 3.99373 10.6987 3.49163 8.85456 3.69584C7.01045 3.90004 5.31221 4.7954 4.10181 6.20159C2.89141 7.60779 2.25878 9.42037 2.33129 11.2743C2.40381 13.1283 3.1761 14.8859 4.49264 16.1933L11.7588 23.4711C12.3672 24.0699 13.1867 24.4055 14.0404 24.4055C14.8941 24.4055 15.7136 24.0699 16.322 23.4711L23.5882 16.1933C24.9543 14.8188 25.7211 12.9595 25.7211 11.0216C25.7211 9.08363 24.9543 7.2244 23.5882 5.84989ZM21.9384 14.5786L14.6722 21.8447C14.5896 21.9282 14.4911 21.9945 14.3827 22.0397C14.2742 22.0849 14.1579 22.1082 14.0404 22.1082C13.9229 22.1082 13.8066 22.0849 13.6981 22.0397C13.5897 21.9945 13.4912 21.9282 13.4086 21.8447L6.14244 14.5435C5.22482 13.6055 4.71099 12.3455 4.71099 11.0333C4.71099 9.7211 5.22482 8.46107 6.14244 7.52308C7.07751 6.59989 8.33862 6.08223 9.65264 6.08223C10.9667 6.08223 12.2278 6.59989 13.1628 7.52308C13.2716 7.63275 13.401 7.7198 13.5436 7.7792C13.6862 7.8386 13.8391 7.86919 13.9936 7.86919C14.1481 7.86919 14.301 7.8386 14.4436 7.7792C14.5862 7.7198 14.7156 7.63275 14.8243 7.52308C15.7594 6.59989 17.0205 6.08223 18.3345 6.08223C19.6486 6.08223 20.9097 6.59989 21.8448 7.52308C22.775 8.44878 23.3057 9.70197 23.3232 11.0142C23.3407 12.3264 22.8436 13.5933 21.9384 14.5435V14.5786Z" fill="#0C3054"/></svg>
-                </div>
-              </div>
-              <div class="gg-card__body">
-                <h3 class="gg-card__title">{{ product.title }}</h3>
-                {%- if product.price_varies == false -%}
-                  <div class="gg-card__price">{{ product.price | money }}</div>
-                {%- elsif product.price_varies -%}
-                  <div class="gg-card__price">{{ product.price_min | money }} – {{ product.price_max | money }}</div>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endunless -%}
         {%- endif -%}
       {%- endfor -%}
     </div>

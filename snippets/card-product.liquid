@@ -55,6 +55,7 @@
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
     <div class="card-wrapper product-card-wrapper underline-links-hover">
+      {% render 'wls-card-heart', card_product: card_product, style_mode: 'badge' %}
       <div
         class="
           card card--{{ settings.card_style }}

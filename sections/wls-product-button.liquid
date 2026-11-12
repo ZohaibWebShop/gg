@@ -1,0 +1,106 @@
+{% comment %}
+  WishlistSuite SDK — Custom Product Page Button Section
+  https://wishlistsuite-1.gitbook.io/wishlistsuite-help-doc/app-overview/building-custom-wishlist-buttons-using-the-wishlistsuite-sdk
+{% endcomment %}
+
+{%- if product -%}
+  <div class="wls-btn-wrap">
+    <button type="button" id="wls-btn-{{ section.id }}" class="wls-btn" aria-label="Add to Wishlist">
+      <svg class="wls-btn__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <path d="M12 21s-7.5-4.9-10-9.2C.4 8.6 1.9 5 5.2 5c2 0 3.4 1.1 4.1 2.3l.7 1 .7-1C11.5 6.1 12.8 5 14.8 5 18.1 5 19.6 8.6 22 11.8 19.5 16.1 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span class="wls-label">Add to Wishlist</span>
+    </button>
+    <span class="wls-count" id="wls-count-{{ section.id }}"></span>
+  </div>
+
+  <style>
+    .wls-btn-wrap { display:inline-flex; align-items:center; gap:12px; margin: 12px 0; }
+    #wls-btn-{{ section.id }} {
+      display:inline-flex; align-items:center; gap:8px; padding:11px 20px;
+      border:1px solid #0c3054; border-radius:8px; background:#fff; color:#0c3054;
+      font-weight:600; cursor:pointer; font-family:inherit; font-size:14px;
+      transition: all 0.2s ease;
+    }
+    #wls-btn-{{ section.id }}:hover {
+      background: #f1f2ee;
+    }
+    #wls-btn-{{ section.id }} svg { fill:none; stroke:currentColor; stroke-width:2; transition:fill .2s, stroke .2s; }
+    #wls-btn-{{ section.id }}.is-filled { border-color:#f26728; color:#f26728; }
+    #wls-btn-{{ section.id }}.is-filled svg { fill:#f26728; stroke:#f26728; }
+    #wls-count-{{ section.id }} { font-size:13px; color:#64676b; white-space:nowrap; }
+  </style>
+
+  <script>
+  (function () {
+    var btn     = document.getElementById('wls-btn-{{ section.id }}');
+    if (!btn) return;
+    var label   = btn.querySelector('.wls-label');
+    var countEl = document.getElementById('wls-count-{{ section.id }}');
+
+    var data = {
+      productId:     {{ product.id | json }},
+      variantId:     {{ product.selected_or_first_available_variant.id | json }},
+      productHandle: {{ product.handle | json }},
+      productTitle:  {{ product.title | json }},
+      productImage:  {{ product.featured_image | image_url: width: 200 | json }}
+    };
+    var pid = String(data.productId), vid = String(data.variantId);
+
+    function paint(inList) {
+      btn.classList.toggle('is-filled', inList);
+      if (label) label.textContent = inList ? 'Saved in Wishlist' : 'Add to Wishlist';
+    }
+
+    function refreshCount(wls) {
+      if (countEl && typeof wls.getCount === 'function') {
+        wls.getCount(pid).then(function (n) {
+          countEl.textContent = n > 0 ? ('♥ ' + n + ' saved') : '';
+        });
+      }
+    }
+
+    var saved = JSON.parse(localStorage.getItem('wishlistVariantIds') || '[]').map(String);
+    paint(saved.indexOf(vid) > -1 || saved.indexOf(pid) > -1);
+
+    window.WishlistCallbacks = window.WishlistCallbacks || [];
+    window.WishlistCallbacks.push(function (wls) {
+      if (typeof wls.isWishlisted === 'function') {
+        wls.isWishlisted(pid, data.variantId).then(paint);
+      }
+      refreshCount(wls);
+
+      btn.addEventListener('click', function () {
+        var next = !btn.classList.contains('is-filled');
+        paint(next);
+        wls.toggle(data).then(function (r) {
+          paint(r.isWishlisted);
+          refreshCount(wls);
+        }).catch(function () {
+          paint(!next);
+        });
+      });
+
+      wls.on('change', function (d) {
+        if (!d) return;
+        if (String(d.productId) === pid) {
+          paint(d.isWishlisted);
+          refreshCount(wls);
+        }
+      });
+    });
+  })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "WLS Product Button",
+  "settings": [],
+  "presets": [
+    {
+      "name": "WLS Product Button"
+    }
+  ]
+}
+{% endschema %}
