@@ -13,13 +13,14 @@
 {% endcomment %}
 
 {%- liquid
+  assign wls_card_hearts_enabled = false
   assign target_product = product
   if target_product == blank
     assign target_product = card_product
   endif
 -%}
 
-{%- if target_product != blank and target_product.id != blank -%}
+{%- if wls_card_hearts_enabled and target_product != blank and target_product.id != blank -%}
   {%- liquid
     assign wls_variant = target_product.selected_or_first_available_variant
     assign wls_img_url = target_product.featured_image | image_url: width: 300

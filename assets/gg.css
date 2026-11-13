@@ -4615,3 +4615,15 @@ h2,
 .wls-drawer-item-price {
   display: none !important;
 }
+
+/* WishlistSuite — temporarily disabled. Remove this block to re-enable. */
+.wls-header-icon,
+.wls-heart,
+.wls-heart--badge,
+.gg-card__heart--placeholder,
+.wls-btn-wrap,
+#wls-drawer-overlay,
+.wls-drawer-overlay,
+.wls-drawer-panel {
+  display: none !important;
+}
