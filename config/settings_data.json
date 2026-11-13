@@ -159,6 +159,15 @@
           "customcss": "",
           "customjs": ""
         }
+      },
+      "3746619903770602455": {
+        "type": "shopify://apps/wishlistsuite/blocks/wishlist-header-icon/c2905ea4-a4c7-46db-b02a-fc294afa02e5",
+        "disabled": false,
+        "settings": {
+          "custom_cart_icon_selector": "",
+          "customcss": "",
+          "customjs": ""
+        }
       }
     },
     "color_schemes": {

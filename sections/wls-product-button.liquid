@@ -60,6 +60,13 @@
       }
     }
 
+    function openDrawer() {
+      var cfg = window.WishlistGlobal && window.WishlistGlobal.config;
+      if ((!cfg || cfg.displayMode === 'drawer') && window.WishlistDrawer && typeof window.WishlistDrawer.open === 'function') {
+        window.WishlistDrawer.open();
+      }
+    }
+
     var saved = JSON.parse(localStorage.getItem('wishlistVariantIds') || '[]').map(String);
     paint(saved.indexOf(vid) > -1 || saved.indexOf(pid) > -1);
 
@@ -76,6 +83,7 @@
         wls.toggle(data).then(function (r) {
           paint(r.isWishlisted);
           refreshCount(wls);
+          if (r && r.isWishlisted) openDrawer();
         }).catch(function () {
           paint(!next);
         });

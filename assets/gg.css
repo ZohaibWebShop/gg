@@ -343,6 +343,41 @@
   position: relative;
 }
 
+/* WishlistSuite header icon */
+.wls-header-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 4px;
+}
+.wls-header-icon:hover {
+  color: var(--gg-orange) !important;
+  transform: scale(1.1);
+}
+.wls-header-icon svg {
+  fill: currentColor;
+  stroke: none !important;
+}
+.wls-header-count {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--gg-orange, #F26728);
+  color: #fff;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 700;
+  font-family: var(--gg-sans);
+  pointer-events: none;
+}
+
 .gg-header__cart-badge {
   position: absolute;
   top: -6px;
@@ -4573,4 +4608,10 @@ h2,
     width: 100%;
     padding: 14px 20px;
   }
+}
+
+/* WishlistSuite drawer — hide add-to-cart button and item price */
+.wls-drawer-atc,
+.wls-drawer-item-price {
+  display: none !important;
 }

@@ -37,6 +37,7 @@
     </nav>
 
     <div class="gg-header__icons">
+      {% render 'wls-header-icon' %}
       {% comment %}
       <a href="{{ routes.search_url }}" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg>
@@ -94,6 +95,7 @@
   </nav>
 
   <div class="gg-header__menu-icons">
+    {% render 'wls-header-icon' %}
     {% comment %}
     <a href="{{ routes.search_url }}" aria-label="Search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg>
